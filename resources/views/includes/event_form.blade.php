@@ -140,7 +140,7 @@
         </div>
     </div>
 
-    <!-- start_time & end_time -->
+    <!-- location & desc -->
     <div class="form-row col-sm-12">
         <!-- location -->
         <div class="form-group col-sm-6 {{ $errors->has('location') ? 'has-error' : '' }}">
@@ -170,7 +170,7 @@
         </div>
     </div>
 
-    <!-- start_time & end_time -->
+    <!-- points & max_no_attendees -->
     <div class="form-row col-sm-12">
         <!-- points -->
         <div class="form-group col-sm-6 {{ $errors->has('points') ? 'has-error' : '' }}">

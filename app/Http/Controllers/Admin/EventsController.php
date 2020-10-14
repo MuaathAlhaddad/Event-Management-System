@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyEventRequest;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\User;
+use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,9 @@ class EventsController extends Controller
             if((integer) rtrim($percentage, "%") == 100) {
                 $event->status = true;    
             } 
+            if (Carbon::now() > $event->end_time ) {
+                $event->delete();
+            }
         }
         return view('admin.events.index', compact('events'));
     }
