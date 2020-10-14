@@ -24,7 +24,19 @@ $(document).ready(function () {
     format: 'YYYY-MM-DD HH:mm:ss',
     locale: 'en',
     sideBySide: true,
-    stepping: 30
+    stepping: 30,
+    icons: { 
+        time: 'far fa-clock',
+        date: 'fas fa-calendar-week', 
+        up: 'fas fa-chevron-up',
+        down: 'fas fa-chevron-down',
+        previous: 'fas fa-backward', 
+        previous: 'fas fa-backward',
+        next: 'fas fa-forward',
+        today: 'far fa-square', 
+        clear: 'far fa-square', 
+        close: 'fas fa-times'
+    }
   })
 
   $('.timepicker').datetimepicker({
