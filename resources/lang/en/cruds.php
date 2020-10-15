@@ -76,7 +76,9 @@ return [
         ],
     ],
     'event'          => [
-        'title'          => 'All Events',
+        'title'          => 'Events',
+        'all'          => 'All Events',
+        'deleted'          => 'Deleted Events',
         'title_singular' => 'Event',
         'fields'         => [
             'id'                => 'ID',

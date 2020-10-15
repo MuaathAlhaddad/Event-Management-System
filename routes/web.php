@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Events
     Route::delete('events/destroy', 'EventsController@massDestroy')->name('events.massDestroy');
+    Route::get('deletedEvents', 'EventsController@deletedEvents')->name('deletedEvents'); 
     Route::resource('events', 'EventsController');
 
     Route::get('publish', function () {

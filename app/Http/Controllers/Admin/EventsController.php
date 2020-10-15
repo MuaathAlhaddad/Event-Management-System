@@ -20,8 +20,7 @@ class EventsController extends Controller
     {
         abort_if(Gate::denies('event_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
-        $events = Event::withCount('events')
-        ->get();
+        $events = Event::withCount('events')->get();
 
         foreach ($events as $key => $event) {
             // Calculate Percentage
@@ -31,6 +30,7 @@ class EventsController extends Controller
             $percentage = number_format( $percent * 100) . '%';
             // update field 
             $event->percentage = $percentage;
+            $event->save();
             if((integer) rtrim($percentage, "%") == 100) {
                 $event->status = true;    
             } 
@@ -97,5 +97,9 @@ class EventsController extends Controller
         Event::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function deletedEvents() {
+        return view('admin.events.deletedEvents')->with(['deletedEvents' => Event::onlyTrashed()->get()]);
     }
 }

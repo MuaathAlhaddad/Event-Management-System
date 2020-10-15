@@ -61,13 +61,30 @@
                 </a>
             </li>
             @can('event_access')
-                <li class="nav-item">
-                    <a href="{{ route("admin.events.index") }}" class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
+                <li class="nav-item nav-dropdown">
+                    <a class="nav-link  nav-dropdown-toggle" href="#">
                         <i class="fa-fw fas fa-calendar nav-icon">
 
                         </i>
                         {{ trans('cruds.event.title') }}
                     </a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item">
+                            <a href="{{ route("admin.events.index") }}" class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-calendar nav-icon">
+        
+                                </i>
+                                {{ trans('cruds.event.all') }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route("admin.deletedEvents") }}" class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
+                                <i class="fa-fw fas fa-trash-alt nav-icon">
+                                </i>
+                                {{ trans('cruds.event.deleted') }}
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             @endcan
             <li class="nav-item">
