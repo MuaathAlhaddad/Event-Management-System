@@ -22,7 +22,6 @@ class SystemCalendarController extends Controller
     public function index()
     {
         $events = [];
-        dd($this->sources);
         foreach ($this->sources as $source) {
             foreach ($source['model']::all() as $model) {
                 $crudFieldValue = $model->getOriginal($source['date_field']);
@@ -32,15 +31,14 @@ class SystemCalendarController extends Controller
                 }
 
                 $events[] = [
-                    'title' => trim($source['prefix'] . " " . $model->{$source['field']}
-                        . " " . $source['suffix']),
+                    'title' => strtoupper(trim($source['prefix'] . " " . $model->{$source['field']}
+                        . " " . $source['suffix'])),
                     'start' => $crudFieldValue,
                     'end'   => $model->{$source['end_field']},
                     'url'   => route($source['route'], $model->id),
                 ];
             }
         }
-
         return view('admin.calendar.calendar', compact('events'));
     }
 }

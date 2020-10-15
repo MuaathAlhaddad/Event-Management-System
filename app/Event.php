@@ -42,6 +42,7 @@ class Event extends Model
 
     protected $fillable = [
         'name',
+        'start_time',
         'end_time',
         'event_id',
         'category',
@@ -52,7 +53,6 @@ class Event extends Model
         'desc',
         'max_no_attendees',
         'status',
-        'start_time',
         'recurrence',
         'created_at',
         'updated_at',

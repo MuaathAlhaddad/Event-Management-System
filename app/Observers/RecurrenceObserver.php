@@ -41,10 +41,16 @@ class RecurrenceObserver
                     $startTime->{$recurrence['function']}();
                     $endTime->{$recurrence['function']}();
                     $event->events()->create([
-                        'name'          => $event->name,
-                        'start_time'    => $startTime,
-                        'end_time'      => $endTime,
-                        'recurrence'    => $event->recurrence,
+                        'name'                  => $event->name,
+                        'category'              => $event->category,
+                        'start_time'            => $startTime,
+                        'end_time'              => $endTime,
+                        'location'              => $event->location,
+                        'desc'                  => $event->desc,
+                        'points'                => $event->points,
+                        'max_no_attendees'      => $event->max_no_attendees,
+                        'recurrence'            => $event->recurrence,
+                        'moderator_id'           => $event->moderator_id,
                     ]);
                 }
         }

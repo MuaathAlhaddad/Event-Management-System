@@ -39,7 +39,6 @@ class UpdateEventRequest extends FormRequest
             'start_time' => [
                 'required',
                 'date_format:' . config('panel.date_format') . ' ' . config('panel.time_format'),
-                'after:now'
             ],
             'end_time'   => [
                 'required',
