@@ -9,6 +9,8 @@ return [
     'create'                               => 'Create',
     'dashboard'                            => 'Dashboard',
     'delete'                               => 'Delete',
+    'restore'                              => 'Restore',
+    'permanent_delete'                     => 'Delete Permanently',
     'downloadFile'                         => 'Download file',
     'edit'                                 => 'Edit',
     'emailVerificationSuccess'             => 'User email verified successfully',

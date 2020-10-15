@@ -100,6 +100,23 @@ class EventsController extends Controller
     }
 
     public function deletedEvents() {
+        abort_if(Gate::denies('event_access_deletedEvents'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('admin.events.deletedEvents')->with(['deletedEvents' => Event::onlyTrashed()->get()]);
+    }
+
+    public function restore($id) {
+        abort_if(Gate::denies('event_restore'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $event = Event::onlyTrashed()->where('id', $id)->first();
+        $event->restore();
+
+        return back();
+    }
+
+    public function destroy_permanently($id) {
+        abort_if(Gate::denies('event_delete_permanently'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $event = Event::onlyTrashed()->where('id', $id)->first();
+        $event->forceDelete();
+        
+        return back();
     }
 }

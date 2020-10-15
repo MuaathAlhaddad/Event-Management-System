@@ -28,24 +28,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     // Events
     Route::delete('events/destroy', 'EventsController@massDestroy')->name('events.massDestroy');
-    Route::get('deletedEvents', 'EventsController@deletedEvents')->name('deletedEvents'); 
+    Route::get('events/deletedEvents', 'EventsController@deletedEvents')->name('events.deletedEvents'); 
+    Route::delete('events/destroy_permanently/{id}', 'EventsController@destroy_permanently')->name('events.destroy_permanently'); 
+    Route::get('events/restore/{id}', 'EventsController@restore')->name('events.restore'); 
     Route::resource('events', 'EventsController');
-
-    Route::get('publish', function () {
-        abort_if(Gate::denies('publish'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('publish');
-    });
     
-    Route::get('sing', function () {
-        abort_if(Gate::denies('sing'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('sing');
-    });
-
-    Route::get('projects_index', function () {
-        abort_if(Gate::denies('projects_index'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        return view('projects.index');
-    });
-    
-
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });

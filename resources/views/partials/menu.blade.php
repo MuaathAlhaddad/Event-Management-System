@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route("admin.deletedEvents") }}" class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.events.deletedEvents") }}" class="nav-link {{ request()->is('admin/events') || request()->is('admin/events/*') ? 'active' : '' }}">
                                 <i class="fa-fw fas fa-trash-alt nav-icon">
                                 </i>
                                 {{ trans('cruds.event.deleted') }}
