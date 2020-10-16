@@ -7,9 +7,13 @@ textarea {
     width: 100% !important;
 }
 
+.dataTables_filter input{
+    border-radius: 10px;
+}
 .dataTables_length,
 .dataTables_filter,
 .dt-buttons {
+    text-transform: capitalize !important;
     margin-bottom: 0.333em;
     margin-top: .2rem;
 }

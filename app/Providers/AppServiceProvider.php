@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Event::observe(RecurrenceObserver::class);
         Blade::include('includes.user_form', 'user_form');
         Blade::include('includes.event_form', 'event_form'); 
-        Blade::include('includes.form_style', 'form_style'); 
+        Blade::include('includes.form_style', 'form_style');
+        Blade::include('includes.datatablescript', 'datatablescript'); 
     }
 }

@@ -2,21 +2,21 @@
 @section('content')
 @can('user_create')
     <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.users.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
+        <div class="col-lg-12 ">
+            <a class="btn btn-success text-capitalize font-weight-bold" href="{{ route("admin.users.create") }}">
+                <i class="fas fa-user-plus mr-2"></i> {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
+@form_style()
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-User">
+            <table class="table table-bordered text-center table-striped table-hover datatable datatable-User">
                 <thead>
                     <tr>
                         <th width="10">
@@ -35,7 +35,7 @@
                             {{ trans('cruds.user.fields.roles') }}
                         </th>
                         <th>
-                            &nbsp;
+                            Actions
                         </th>
                     </tr>
                 </thead>
@@ -48,18 +48,18 @@
                             <td>
                                 {{ $user->id ?? '' }}
                             </td>
-                            <td>
+                            <td class="text-capitalize">
                                 {{ $user->first_name ?? '' }} {{ $user->last_name ?? '' }} 
                             </td>
-                            <td>
+                            <td class="text-lowercase">
                                 {{ $user->email ?? '' }}
                             </td>
-                            <td>
+                            <td >
                                 @foreach($user->roles as $key => $item)
                                     <span class="badge badge-info">{{ $item->title }}</span>
                                 @endforeach
                             </td>
-                            <td>
+                            <td class="text-capitalize">
                                 @can('user_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
                                         {{ trans('global.view') }}
@@ -86,57 +86,8 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-
-
     </div>
 </div>
 @endsection
-@section('scripts')
-@parent
-<script>
-    $(function () {
-  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('user_delete')
-  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-  let deleteButton = {
-    text: deleteButtonTrans,
-    url: "{{ route('admin.users.massDestroy') }}",
-    className: 'btn-danger',
-    action: function (e, dt, node, config) {
-      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-          return $(entry).data('entry-id')
-      });
 
-      if (ids.length === 0) {
-        alert('{{ trans('global.datatables.zero_selected') }}')
-
-        return
-      }
-
-      if (confirm('{{ trans('global.areYouSure') }}')) {
-        $.ajax({
-          headers: {'x-csrf-token': _token},
-          method: 'POST',
-          url: config.url,
-          data: { ids: ids, _method: 'DELETE' }})
-          .done(function () { location.reload() })
-      }
-    }
-  }
-  dtButtons.push(deleteButton)
-@endcan
-
-  $.extend(true, $.fn.dataTable.defaults, {
-    order: [[ 1, 'desc' ]],
-    pageLength: 100,
-  });
-  $('.datatable-User:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-        $($.fn.dataTable.tables(true)).DataTable()
-            .columns.adjust();
-    });
-})
-
-</script>
-@endsection
+@datatablescript(['para' => ['delete' => 'user_delete', 'route' => "users/destroy", 'class' => '.datatable-User:not(.ajaxTable)']])

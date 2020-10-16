@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('events/destroy_permanently/{id}', 'EventsController@destroy_permanently')->name('events.destroy_permanently'); 
     Route::get('events/restore/{id}', 'EventsController@restore')->name('events.restore'); 
     Route::resource('events', 'EventsController');
-    
+
+    // Calendar
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
