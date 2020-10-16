@@ -3,12 +3,13 @@
 @can('event_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12 ">
-            <a class="btn btn-success float-right" href="{{ route("admin.events.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.event.title_singular') }}
+            <a class="btn btn-success text-capitalize font-weight-bold" href="{{ route("admin.events.create") }}">
+                <i class="fas fa-plus mr-2"></i> {{ trans('global.add') }} {{ trans('cruds.event.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
+@card_style()
 <div class="card">
     <div class="card-header">
         <span class=" text-uppercase font-weight-bold" >
@@ -18,7 +19,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Event">
+            <table class=" table table-bordered text-center table-striped table-hover datatable datatable-Event">
                 <thead>
                     <tr>
                         <th width="10"></th>
@@ -33,7 +34,7 @@
                 </thead>
                 <tbody>
                     @foreach($events as $key => $event)
-                        <tr data-entry-id="{{ $event->id }}">
+                        <tr data-entry-id="{{ $event->id }}" class="text-capitalize">
                             <td></td>
                             <td>{{ $event->id ?? '' }}</td>
                             <td>{{ $event->name ?? '' }}</td>
@@ -48,7 +49,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="text-capitalize">
                                 @can('event_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.events.show', $event->id) }}">
                                         {{ trans('global.view') }}
@@ -56,7 +57,7 @@
                                 @endcan
 
                                 @can('event_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.events.edit', $event->id) }}">
+                                    <a class="btn btn-xs btn-warning text-white" href="{{ route('admin.events.edit', $event->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan

@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@card_style()
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
@@ -14,8 +15,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                        <span class="text-capitalize">
+                            Welcome
+                        </span>
+                        <span class="text-warning font-weight-bold">
+                            {{Auth::user()->first_name ?? ''}}
+                        </span>
+                        
                 </div>
             </div>
         </div>

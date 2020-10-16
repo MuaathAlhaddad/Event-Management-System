@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 @section('content')
+@card_style()
+
     <div class="card">
         <div class="card-header">
             {{ trans('cruds.event.title_singular') }} {{ trans('global.list') }}
@@ -22,7 +24,7 @@
                     </thead>
                     <tbody>
                         @foreach($deletedEvents as $event)
-                        <tr data-entry-id="{{ $event->id }}">
+                        <tr data-entry-id="{{ $event->id }}" class="text-capitalize">
                             <td></td>
                             <td>{{ $event->id ?? '' }}</td>
                             <td>{{ $event->name ?? '' }}</td>
@@ -57,7 +59,7 @@
                                 @endcan
 
                                 @can('event_restore')
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.events.restore', $event->id) }}">
+                                <a class="btn btn-xs btn-warning text-white" href="{{ route('admin.events.restore', $event->id) }}">
                                     {{ trans('global.restore') }}
                                 </a>
                                 @endcan

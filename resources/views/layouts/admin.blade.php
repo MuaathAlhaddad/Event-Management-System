@@ -30,7 +30,7 @@
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href=" {{route('admin.home')}} ">
           <i class="fas fa-kaaba mr-2"></i>
             <span class="navbar-brand-full">{{ trans('panel.site_title') }}</span>
         </a>
@@ -51,9 +51,79 @@
                     </div>
                 </li>
             @endif
-
-
         </ul>
+
+        <ul class="nav navbar-nav ml-auto ">
+          <div class="btn-group mr-2">
+            <a  href="#" class="btn btn-outline-info dropdown-toggle text-capitalize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{Auth::user()->first_name ?? ''}}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right ">
+              <a class="dropdown-item" href="{{ route('admin.users.show', Auth::id()) }}">
+                <i class="nav-icon fas fa-user"></i>
+                Profile
+              </a>
+              <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                <i class="nav-icon fas fa-fw fa-sign-out-alt"></i>
+                {{ trans('global.logout') }}
+              </a>
+
+            </div>
+          </div>
+        </ul>
+
+          {{-- <div class="btn-group dropleft">
+            <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Dropleft
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                <i class="nav-icon fas fa-fw fa-sign-out-alt"></i>
+                {{ trans('global.logout') }}
+              </a>
+              <a class="dropdown-item" href="#">Profile</a>
+            </div>
+          </div> --}}
+        {{-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{Auth::user()->first_name ?? ''}}
+          </a>
+          <div class="dropdown-menu float-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+              <i class="nav-icon fas fa-fw fa-sign-out-alt"></i>
+              {{ trans('global.logout') }}
+            </a>
+            <a class="dropdown-item" href="#">Profile</a>
+          </div>
+        </li> --}}
+          {{-- <li class="nav-item nav-dropdown">
+            <a class="nav-link  nav-dropdown-toggle" href="#">
+              <i class="fa-fw fas fa-users nav-icon">
+
+              </i>
+              {{ trans('cruds.userManagement.title') }}
+            </a>
+            <ul class="nav-dropdown-items">
+              <li class="nav-item">
+                  <a href="#" class="nav-link"
+                      onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                      <i class="nav-icon fas fa-fw fa-sign-out-alt">
+      
+                      </i>
+                      {{ trans('global.logout') }}
+                  </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link"
+                    onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                    <i class="nav-icon fas fa-fw fa-sign-out-alt">
+    
+                    </i>
+                    {{ trans('global.logout') }}
+                </a>
+            </li>
+            </ul>
+          </li> --}}
     </header>
 
     <div class="app-body">

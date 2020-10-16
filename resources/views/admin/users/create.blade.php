@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-@form_style()
+@card_style()
 <div class="card">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
