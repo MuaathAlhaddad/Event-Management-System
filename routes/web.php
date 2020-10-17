@@ -2,16 +2,29 @@
 use Symfony\Component\HttpFoundation\Response;
 
 Route::redirect('/', '/login');
-Route::get('/home', function () {
-    if (session('status')) {
-        return redirect()->route('admin.home')->with('status', session('status'));
-    }
+// Route::get('/home', function () {
+//     if (session('status')) {
+//         return redirect()->route('admin.home')->with('status', session('status'));
+//     }
 
-    return redirect()->route('admin.home');
-});
+//     return redirect()->route('admin.home');
+// });
+
+
 
 Auth::routes(['register' => false]);
 
+// ================================== //
+        /** Front End  */       
+// ================================= //
+Route::get('/home', function () {
+    return view('frontend.home');
+});
+
+
+// ================================== //
+        /** Admin Dashboard */       
+// ================================= //
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     // Permissions
