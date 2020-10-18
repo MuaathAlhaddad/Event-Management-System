@@ -505,7 +505,6 @@ section {
 
 .section-header .section-description {
   text-align: center;
-  padding-bottom: 40px;
   color: #999;
 }
 
@@ -569,6 +568,7 @@ section {
 #about {
   background: #fff;
   padding: 20px 0;
+  height: 600px;
 }
 
 #about .about-container .background {
@@ -577,7 +577,6 @@ section {
   margin-bottom: 10px;
 }
 
-#about 
 #about .about-container .content {
   background: #fff;
 }
@@ -976,11 +975,12 @@ section {
   }
 }
 
-/* Team Section
+/* News Section
 --------------------------------*/
 #team {
   background: #fff;
   padding: 20px 0 60px 0;
+  
 }
 
 #team .member {

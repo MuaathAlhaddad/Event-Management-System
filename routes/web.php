@@ -20,7 +20,7 @@ Auth::routes(['register' => false]);
 
 Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
     Route::get('/home', function () {
-        return view('frontend.pages.home.home');
+        return view('frontend.pages.home.home', ['events' => App\Event::orderBy('created_at', 'desc')->take(3)->get()]);
     })->name('home');
     Route::get('news', 'PagesController@news')->name('news.index');
 });
