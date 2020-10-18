@@ -17,10 +17,13 @@ Auth::routes(['register' => false]);
 // ================================== //
         /** Front End  */       
 // ================================= //
-Route::get('/home', function () {
-    return view('frontend.home');
-});
 
+Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
+    Route::get('/home', function () {
+        return view('frontend.pages.home.home');
+    })->name('home');
+    Route::get('news', 'PagesController@news')->name('news.index');
+});
 
 // ================================== //
         /** Admin Dashboard */       

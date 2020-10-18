@@ -8,12 +8,12 @@
 
 <body>
 
-    @include('frontend.layouts.navBar')
+    @include('frontend.layouts.navBar', ['page' => $page])
 
-    @yield('content')
+    @yield('content', $page)
 
     @include('frontend.layouts.footer')
-  @include('frontend.layouts.scripts')
+    @include('frontend.layouts.scripts')
 </body>
 
 </html>

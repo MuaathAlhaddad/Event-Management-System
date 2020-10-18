@@ -1,16 +1,21 @@
-<header id="header" class="header-transparent">
+@if ($page == 'home')
+  <header id="header" class="header-transparent">
+@else
+  <header id="header">
+
+@endif
     <div class="container">
       <div id="logo" class="pull-left">          
-        <h1 class="p-0"><a href="#hero">WAQAF</a></h1>
+        <h1 class="p-0"><a href="{{ route('frontend.home')}}">WAQAF</a></h1>
       </div>
 
       <nav id="nav-menu-container">
         <ul class="nav-menu">
-          <li class="menu-active"><a href="index.html">Home</a></li>
+          <li class="menu-active"><a href="{{ route('frontend.home')}}">Home</a></li>
           <li><a href="#about">About Us</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
+          <li><a href="#team">News</a></li>
           <li class="menu-has-children"><a href="">Drop Down</a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
