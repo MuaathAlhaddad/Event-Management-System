@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 #header #logo h1 {
   font-size: 36px;
   margin: 0;
-  padding: 6px 0;
+  /* padding: 6px 0; */
   line-height: 1;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
@@ -571,9 +571,7 @@ section {
   height: 600px;
 }
 
-#about .about-container .background {
-  min-height: 300px;
-  background: url(../img/24.jpg) center top no-repeat;
+#about .about-container {
   margin-bottom: 10px;
 }
 
@@ -789,11 +787,12 @@ section {
   border: 2px solid #2dc997;
 }
 
-/* Portfolio Section
+/* Events Section
 --------------------------------*/
 #portfolio {
-  background: #f7f7f7;
+  background: white;
   padding: 20px 0;
+  height: 600px;
 }
 
 #portfolio #portfolio-flters {
@@ -814,7 +813,7 @@ section {
   color: #666666;
   margin: 0 5px 10px 5px;
   transition: all ease-in-out 0.3s;
-  background: white;
+  background: #f7f7f7;
   border-radius: 4px;
 }
 
@@ -866,7 +865,7 @@ section {
   position: absolute;
   right: 50px;
   font-size: 24px;
-  top: calc(50% - 18px);
+  top: 10px !important;
   color: white;
   transition: ease-in-out 0.3s;
 }

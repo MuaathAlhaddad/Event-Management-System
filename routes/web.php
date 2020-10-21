@@ -1,35 +1,34 @@
 <?php
 use Symfony\Component\HttpFoundation\Response;
 
-Route::redirect('/', '/login');
-// Route::get('/home', function () {
-//     if (session('status')) {
-//         return redirect()->route('admin.home')->with('status', session('status'));
-//     }
-
-//     return redirect()->route('admin.home');
-// });
-
-
-
 Auth::routes(['register' => false]);
 
 // ================================== //
         /** Front End  */       
 // ================================= //
-
 Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
-    Route::get('/home', function () {
-        return view('frontend.pages.home.home', ['events' => App\Event::orderBy('created_at', 'desc')->take(3)->get()]);
-    })->name('home');
-    Route::get('news', 'PagesController@news')->name('news.index');
+    Route::get('home', 'PagesController@home')->name('home');
+    Route::get('/', 'PagesController@home')->name('home');
+    Route::get('users/create', 'UsersController@create')->name('users.create'); 
+    Route::post('users/store', 'UsersController@store')->name('users.store'); 
+
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('news', 'PagesController@news')->name('news');
+        Route::resource('events', 'EventsController');
+        Route::get('users', 'UsersController@index')->name('users.index');
+        Route::get('users/{id}', 'UsersController@show')->name('users.show');
+        Route::post('users/register', 'UsersController@register')->name('users.register');
+        Route::post('users/unregister', 'UsersController@unregister')->name('users.unregister');
+        
+    });
 });
 
 // ================================== //
         /** Admin Dashboard */       
 // ================================= //
+Route::get('admin', 'Admin\HomeController@dashboard')->name('admin.dashboard')->middleware('auth');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::get('/', 'HomeController@index')->name('home');
+    
     // Permissions
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
     Route::resource('permissions', 'PermissionsController');

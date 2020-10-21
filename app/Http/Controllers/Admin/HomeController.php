@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 class HomeController
 {
-    public function index()
+    public function dashboard()
     {
-        return view('home');
+        return view('admin.dashboard');
     }
 }

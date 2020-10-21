@@ -34,8 +34,9 @@
               </div>
           </div>
       </div>
-      <div class="section-footer float-right mt-5">
-          <a href="{{ route('frontend.news.index')}} " class="btn btn-outline-light" style=" color: gray;">see more >></a>
+      <div class="section-footer float-right mt-4">
+          <a href="{{ route('frontend.news')}} " class="btn"
+          style=" color: #2dc997; border: 1px solid #2dc997">see more >></a>
       </div>
     </div>
   </section>

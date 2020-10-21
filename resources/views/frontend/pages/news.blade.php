@@ -1,6 +1,6 @@
 @extends('frontend.master', ['page' => 'news'])
 @section('content')
-<section id="team" class="mt-5">
+<section id="team" style="margin-top: 4rem;">
     <div class="container" data-aos="fade-up">
       <div class="section-header">
         <h3 class="section-title">News</h3>

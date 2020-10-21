@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 <style>
     th {
         color: {{config('styles.colors.primary')}};
@@ -48,6 +47,7 @@
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
+                {{-- profile Tab --}}
                 <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
                     aria-labelledby="nav-profile-tab">
                     <table class="table table-borderless">
@@ -95,6 +95,58 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{-- More info Tab --}}
+                <div class="tab-pane fade" id="more-info" role="tabpanel" aria-labelledby="more-info-tab">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    {{ trans('cruds.user.fields.gender') }}
+                                </th>
+                                <td>
+                                    {{ $user->gender }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{ trans('cruds.user.fields.kulliyyah') }}
+                                </th>
+                                <td>
+                                    {{ $user->kulliyyah }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{ trans('cruds.user.fields.points_earned') }}
+                                </th>
+                                <td>
+                                    {{ $user->points_earned ??  'No Points Earned Yet' }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Roles
+                                </th>
+                                <td>
+                                    @foreach($user->roles as $id => $roles)
+                                    <span class="label label-info label-many">{{ $roles->title }}</span>
+                                    @endforeach
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    {{ trans('cruds.user.fields.created_at') }}
+                                </th>
+                                <td>
+                                    {{ $user->created_at  }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {{-- More info Tab --}}
                 <div class="tab-pane fade" id="more-info" role="tabpanel" aria-labelledby="more-info-tab">
                     <table class="table table-borderless">
                         <tbody>
@@ -149,8 +201,6 @@
                 {{ trans('global.back_to_list') }}
             </a>
         </div>
-
-
     </div>
 </div>
 

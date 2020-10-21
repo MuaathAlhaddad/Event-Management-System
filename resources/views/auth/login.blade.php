@@ -4,7 +4,7 @@
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
-                <h1>{{ trans('panel.site_title') }}</h1>
+                <h1 style="text-align: center; color: {{config('styles.frontend.colors.primary')}}">{{ trans('panel.site_title') }}</h1>
 
                 <p class="text-muted">{{ trans('global.login') }}</p>
 
@@ -57,19 +57,21 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <button type="submit" class="btn btn-primary px-4">
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-primary px-5">
                                 {{ trans('global.login') }}
                             </button>
                         </div>
-                        <div class="col-6 text-right">
+                    </div>
+                    <div class="mt-4">
                             @if(Route::has('password.request'))
-                                <a class="btn btn-link px-0" href="{{ route('password.request') }}">
+                                <a class="btn-link px-0" href="{{ route('password.request') }}">
                                     {{ trans('global.forgot_password') }}
                                 </a><br>
                             @endif
-
-                        </div>
+                            <a class="btn-link px-0" href="{{ route('frontend.users.create') }}">
+                                Create new Account
+                            </a><br>
                     </div>
                 </form>
             </div>
