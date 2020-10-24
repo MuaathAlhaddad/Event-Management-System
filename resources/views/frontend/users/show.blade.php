@@ -133,11 +133,11 @@
                                     </tr>
                                     <tr>
                                         <th>
-                                            Roles
+                                            Role
                                         </th>
                                         <td>
                                             @foreach($user->roles as $id => $roles)
-                                            <span class="label label-info label-many">{{ $roles->title }}</span>
+                                            <span class="label label-info label-many badge badge-pill badge-success">  {{ $roles->title }}</span>
                                             @endforeach
                                         </td>
                                     </tr>
@@ -155,6 +155,7 @@
 
                         {{-- Events Registered --}}
                         <div class="tab-pane fade" id="events-registered" role="tabpanel" aria-labelledby="events-registered-tab">
+                            @if($events->count() > 0)
                             <ul class="list-group">
                                 <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border-0">
                                     Name
@@ -175,6 +176,9 @@
                                 </li>
                                 @endforeach
                             </ul>
+                            @else
+                                <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
+                            @endif
                         </div>
                     </div>
                 </div>

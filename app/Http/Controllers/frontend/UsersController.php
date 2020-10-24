@@ -9,7 +9,6 @@ use App\User;
 use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -29,12 +28,46 @@ class UsersController extends Controller
         return view('frontend.users.create', compact('roles'));
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'first_name'     => [
+                'required',
+            ],
+            'last_name'     => [
+                'required',
+            ],
+            'phone_number'     => [
+                'required',
+                'regex:/^([0-9\s\-\+\(\)]*)$/',
+                'min:10'
+            ],
+            'email'    => [
+                'required',
+                'unique:users',
+            ],
+            'gender'    => [
+                'required',
+            ],
+            'kulliyyah'    => [
+                'required',
+            ],
+            'password' => [
+                'required',
+            ],
+            'roles.*'  => [
+                'integer',
+            ],
+            'roles'    => [
+                'required',
+                'array',
+            ]
+        ]);
+
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
-        dd('ready to be redirected');
-        return view(route('frondend.home'));
+        Auth::login($user, true);
+        return redirect()->route('frontend.home');
     }
 
     public function register () {
