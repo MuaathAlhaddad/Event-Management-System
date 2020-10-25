@@ -41,7 +41,7 @@
             <h4 class="d-inline-block ">{{$event->name}}
             </h4>
             @cannot('event_create')
-              @if (!$event->status && !in_array(Auth::id(), $event->attendees_ids))
+              @if (!$event->status && !in_array(Auth::id(), (array)$event->attendees_ids))
                 <form action="{{ route('frontend.users.register')}}" method="post">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">
