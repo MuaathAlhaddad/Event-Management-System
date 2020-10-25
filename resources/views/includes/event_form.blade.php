@@ -69,14 +69,130 @@
         textarea{
             resize: none;
         }
+        .file-upload-btn {
+            width: 100%;
+            margin: 0;
+            color: #fff;
+            background: #1FB264;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            border-bottom: 1px solid #ffc966;;
+            transition: all .2s ease;
+            outline: none;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .file-upload-btn:hover {
+            background: #1AA059;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-btn:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+
+        .file-upload-content {
+            display: none;
+            text-align: center;
+        }
+
+        .file-upload-input {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .image-upload-wrap {
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .image-dropping,
+        .image-upload-wrap:hover {
+            color: #ffc966;
+            background-color: rgb(233, 231, 231);
+            border: 2px dashed #ffc966;
+        }
+        .image-dropping,
+        .image-upload-wrap:hover .drag-text i {
+            color: orange;
+        }
+
+        .image-dropping,
+        .image-upload-wrap:hover .drag-text h3 {
+            color: orange;
+        }
+
+        .image-title-wrap {
+            padding: 0 15px 15px 15px;
+            color: #222;
+        }
+
+        .drag-text {
+            text-align: center;
+        }
+
+        .drag-text h3 {
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #15824B;
+            padding: 0 20px;
+        }
+        .drag-text i {
+            font-size: 5rem;
+            color: #15824B;
+        }
+
+        .file-upload-image {
+            max-height: 300px;
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .remove-image {
+            width: 400px;
+            margin: 0;
+            color: #fff;
+            background: #cd4535;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            border-bottom: 4px solid #b02818;
+            transition: all .2s ease;
+            outline: none;
+        }
+
+        .remove-image:hover {
+            background: #c13b2a;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .remove-image:active {
+            border: 0;
+            transition: all .2s ease;
+        }
     </style>
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
     <!-- name & category-->
     <div class="form-row col-sm-12">
         <!-- name -->
         <div class="form-group col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }}">
             <label for="name">{{ trans('cruds.event.fields.name') }}*</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', isset($event) ? $event->name : '') }}" required>
+            <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }}" value="{{ old('name', isset($event) ? $event->name : '') }}" required>
             @if($errors->has('name'))
                 <em class="invalid-feedback">
                     {{ $errors->first('name') }}
@@ -89,7 +205,7 @@
         <!-- category -->
         <div class="form-group col-sm-6 {{ $errors->has('category') ? 'has-error' : '' }}">
             <label for="category">{{ trans('cruds.event.fields.category') }}*</label>
-            <select id="category" name="category" class="form-control">
+            <select id="category" name="category" class="form-control {{ $errors->has('category') ? 'border-danger' : '' }}">
                 <option selected value="">Choose...</option>
                 @foreach(App\Event::CATEGORIES as $key => $category)
                      
@@ -114,7 +230,7 @@
         <!-- start_time -->
         <div class="form-group col-sm-6 {{ $errors->has('start_time') ? 'has-error' : '' }}">
             <label for="start_time">{{ trans('cruds.event.fields.start_time') }}*</label>
-            <input type="text" id="start_time" name="start_time" class="form-control datetime" value="{{ old('start_time', isset($event) ? $event->start_time : '') }}" required>
+            <input type="text" id="start_time" name="start_time" class="form-control datetime {{ $errors->has('start_time') ? 'border-danger' : '' }}" value="{{ old('start_time', isset($event) ? $event->start_time : '') }}" required>
             @if($errors->has('start_time'))
                 <em class="invalid-feedback">
                     {{ $errors->first('start_time') }}
@@ -128,9 +244,9 @@
         <!-- end_time -->
         <div class="form-group col-sm-6 {{ $errors->has('end_time') ? 'has-error' : '' }}">
             <label for="end_time">{{ trans('cruds.event.fields.end_time') }}*</label>
-            <input type="text" id="end_time" name="end_time" class="form-control datetime" value="{{ old('end_time', isset($event) ? $event->end_time : '') }}" required>
+            <input type="text" id="end_time" name="end_time" class="form-control datetime {{ $errors->has('end_time') ? 'border-danger' : '' }}" value="{{ old('end_time', isset($event) ? $event->end_time : '') }}" required>
             @if($errors->has('end_time'))
-                <em class="invalid-feedback">
+                <em class="invalid-feedback color-dark">
                     {{ $errors->first('end_time') }}
                 </em>
             @endif
@@ -145,7 +261,7 @@
         <!-- location -->
         <div class="form-group col-sm-6 {{ $errors->has('location') ? 'has-error' : '' }}">
             <label for="location">{{ trans('cruds.event.fields.location') }}*</label>
-            <textarea id="location" name="location" class="form-control" required rows="3">{{ old('location', isset($event) ? $event->location : '') }}</textarea>
+            <textarea id="location" name="location" class="form-control {{ $errors->has('location') ? 'border-danger' : '' }}" required rows="3">{{ old('location', isset($event) ? $event->location : '') }}</textarea>
             @if($errors->has('location'))
                 <em class="invalid-feedback">
                     {{ $errors->first('location') }}
@@ -158,7 +274,7 @@
         <!-- desc -->
         <div class="form-group col-sm-6{{ $errors->has('desc') ? 'has-error' : '' }}">
             <label for="desc">{{ trans('cruds.event.fields.desc') }}*</label>
-            <textarea id="desc" name="desc" class="form-control"  required rows="3">{{ old('desc', isset($event) ? $event->desc : '') }}</textarea>
+            <textarea id="desc" name="desc" class="form-control {{ $errors->has('desc') ? 'border-danger' : '' }}"  required rows="3">{{ old('desc', isset($event) ? $event->desc : '') }}</textarea>
             @if($errors->has('desc'))
                 <em class="invalid-feedback">
                     {{ $errors->first('desc') }}
@@ -175,7 +291,7 @@
         <!-- points -->
         <div class="form-group col-sm-6 {{ $errors->has('points') ? 'has-error' : '' }}">
             <label for="points">{{ trans('cruds.event.fields.points') }}*</label>
-            <input type="number" id="points" name="points" class="form-control" value="{{ old('points', isset($event) ? $event->points : '') }}" required>
+            <input type="number" id="points" name="points" class="form-control {{ $errors->has('points') ? 'border-danger' : '' }}" value="{{ old('points', isset($event) ? $event->points : '') }}" required>
             @if($errors->has('points'))
                 <em class="invalid-feedback">
                     {{ $errors->first('points') }}
@@ -188,7 +304,7 @@
         <!-- max_no_attendees -->
         <div class="form-group col-sm-6 {{ $errors->has('max_no_attendees') ? 'has-error' : '' }}">
             <label for="max_no_attendees">{{ trans('cruds.event.fields.max_no_attendees') }}*</label>
-            <input type="number" id="max_no_attendees" name="max_no_attendees" class="form-control" value="{{ old('max_no_attendees', isset($event) ? $event->max_no_attendees : '') }}" required>
+            <input type="number" id="max_no_attendees" name="max_no_attendees" class="form-control {{ $errors->has('max_no_attendees') ? 'border-danger' : '' }}" value="{{ old('max_no_attendees', isset($event) ? $event->max_no_attendees : '') }}" required>
             @if($errors->has('max_no_attendees'))
                 <em class="invalid-feedback">
                     {{ $errors->first('max_no_attendees') }}
@@ -200,6 +316,7 @@
         </div>
     </div>
 
+    @can('user_create')    
     <!-- Add  Attendees -->
     <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}">
         <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}*</label>        
@@ -216,6 +333,7 @@
             </em>
         @endif
     </div>
+    @endcan
      <!-- recurrence -->
     <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}">
         <label>{{ trans('cruds.event.fields.recurrence') }}*</label>
@@ -232,6 +350,63 @@
             </em>
         @endif
     </div>
+
+     <!-- profile -->
+    <div class="file-upload">
+        <div class="form-group">
+            <div class="image-upload-wrap border ">
+                <input class="file-upload-input" type='file' onchange="readURL(this)" accept="image/*" name="profile" />
+                <div class="drag-text">
+                    <h3>Click or Drag & drop an image</h3>
+                    <i class="fa fa-cloud-upload"></i>
+                </div>
+            </div>
+            <div class="file-upload-content">
+                <img class="file-upload-image" src="#" alt="your image" />
+                <div class="image-title-wrap">
+                    <button type="button" onclick="removeUpload()" class="remove-image">
+                        <b>Remove</b> <span class="image-title">Uploaded Image</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     <div class="text-center">
         <input class="btn btn-success w-25" style="font-weight: bold; font-family: system-ui;" type="submit" value="{{ trans('global.save') }}">
     </div>
+
+    
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide();
+
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
+
+                    $('.image-title').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+    </script>

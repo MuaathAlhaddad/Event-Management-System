@@ -4,6 +4,11 @@
     <div class="container" data-aos="fade-up">
       
       <div class="section-header">
+        <div class="float-left">
+            <button class=" btn" onclick="window.history.back()" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">
+                Back
+            </button>
+        </div>
         <h3 class="section-title mb-5">Event Details</h3>
       </div>
 
@@ -31,7 +36,7 @@
                           <td>{{$event->points}}</td>
                       </tr>
                       <tr>
-                          <th>Status</th>
+                          <th>Attendance</th>
                           <td>
                               <div class="progress border" style="height: 25px;">
                                   <div class="progress-bar bg-success" role="progressbar"
@@ -58,20 +63,22 @@
                   </small>
               </p>
           </div>
-          @if (in_array(Auth::id(), $event->attendees_ids))
-            <div class="card-footer text-center" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">
-                You are Registered in this Event
-            </div>
-          @else    
-            <form action="{{route('frontend.users.register')}}" method="post">
-                    @csrf
-                    <input type="hidden" name="event_id" value="{{$event->id}}">
-                    <input type="hidden" name="user_id" value="{{Auth::id()}}">
-                <div class="card-footer text-center">
-                    <button class=" btn" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">Register</button>
+          @cannot('event_create')
+            @if (in_array(Auth::id(), $event->attendees_ids))
+                <div class="card-footer text-center" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">
+                    You are Registered in this Event
                 </div>
-            </form>
-          @endif
+            @else    
+                <form action="{{route('frontend.users.register')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="event_id" value="{{$event->id}}">
+                        <input type="hidden" name="user_id" value="{{Auth::id()}}">
+                    <div class="card-footer text-center">
+                        <button class=" btn" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">Register</button>
+                    </div>
+                </form>
+            @endif
+          @endcannot
           
         </div>
         @endif

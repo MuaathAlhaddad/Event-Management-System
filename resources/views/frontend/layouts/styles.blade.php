@@ -15,6 +15,7 @@
    <link href="{{ asset("frontend/assets/vendor/owl.carousel/assets/owl.carousel.min.css")}}" rel="stylesheet">
    <link href="{{ asset("frontend/assets/vendor/venobox/venobox.css")}}" rel="stylesheet">
    <link href="{{ asset("frontend/assets/vendor/aos/aos.css")}}" rel="stylesheet">
- 
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
    <!-- Template Main CSS File -->
-   <link href="{{ asset('frontend/assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{ asset('frontend/assets/css/style.css')}}" rel="stylesheet">
+

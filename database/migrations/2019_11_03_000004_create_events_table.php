@@ -13,7 +13,7 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->text('location');
             $table->integer('points');
-            $table->integer('max_no_attendees');
+            $table->integer('max_no_attendees')->nullable();
             $table->integer('moderator_id')->nullable();            
             $table->string('percentage')->nullable();
             $table->json('attendees_ids')->nullable();
@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->datetime('start_time');
             $table->datetime('end_time');
             $table->string('recurrence');
+            $table->string('profile');
             $table->timestamps();
             $table->softDeletes();
         });

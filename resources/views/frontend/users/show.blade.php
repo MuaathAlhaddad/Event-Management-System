@@ -26,7 +26,7 @@
 </style>
 
 
-<section id="portfolio" class="portfolio" style="margin-top: 4rem; height: 700px; ">
+<section id="portfolio" class="portfolio" style="margin-top: 4rem;">
     <div class="container" data-aos="fade-up">
         @if(session()->has('success'))
         <div class="alert alert-success">
@@ -41,7 +41,7 @@
             <div class="card-body" style="position: absolute;
             top: 80px;
             margin-top: 30px;
-            width: 500px;">
+            width: 700px;">
                 <div class="mb-2">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -49,8 +49,13 @@
                                 role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
                             <a class="nav-item nav-link" id="more-info-tab" data-toggle="tab" href="#more-info"
                                 role="tab" aria-controls="more-info" aria-selected="false">More Info</a>
-                            <a class="nav-item nav-link" id="events-registered-tab" data-toggle="tab" href="#events-registered"
-                                role="tab" aria-controls="events-registered" aria-selected="false">Events Registered</a>
+                                @can('event_create')
+                                    <a class="nav-item nav-link" id="events-created-tab" data-toggle="tab" href="#events-created"
+                                    role="tab" aria-controls="events-created" aria-selected="false">Events Created</a>
+                                @else
+                                <a class="nav-item nav-link" id="events-registered-tab" data-toggle="tab" href="#events-registered"
+                                    role="tab" aria-controls="events-registered" aria-selected="false">Events Registered</a>
+                                @endcan
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -152,34 +157,93 @@
                                 </tbody>
                             </table>
                         </div>
+                        @can('event_create')
+                            {{-- Events Created --}}
+                            <div class="tab-pane fade" id="events-created" role="tabpanel" aria-labelledby="events-created-tab">
+                                @if($events->count() > 0)
+                                <ul class="list-group">
+                                    <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border-0">
+                                        Name
+                                        <i class="fa fa-map-marker pr-3"></i>
+                                        <i class="fa fa-calendar pr-2"></i>
+                                        <i ></i>
+                                        @can('event_create')
+                                            <i ></i>
+                                            <i ></i>
+                                            <i ></i>
+                                        @else
+                                        <i class="fa  fa-user-times"></i>
+                                        @endcan
+                                    </li>
+                                    @foreach ($events as $event)
+                                    <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border shadow">
+                                    {{ucfirst($event->name)}}
+                                    <small>{{$event->location}}</small>
+                                    <span class="badge badge-primary badge-pill">{{$event->start_time}}</span>
+                                    @can('event_show')
+                                    <a class="btn btn-xs btn-primary"
+                                        href="{{ route('frontend.events.show', $event->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                    @endcan
 
-                        {{-- Events Registered --}}
-                        <div class="tab-pane fade" id="events-registered" role="tabpanel" aria-labelledby="events-registered-tab">
-                            @if($events->count() > 0)
-                            <ul class="list-group">
-                                <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border-0">
-                                    Name
-                                    <i class="fa fa-map-marker pr-3"></i>
-                                    <i class="fa fa-calendar pr-2"></i>
-                                    <i class="fa fa-user-times"></i>
-                                </li>
-                                @foreach ($events as $event)
-                                <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border shadow">
-                                  {{ucfirst($event->name)}}
-                                  <small>{{$event->location}}</small>
-                                  <span class="badge badge-primary badge-pill">{{$event->start_time}}</span>
-                                  <form action=" {{route('frontend.users.unregister')}}" method="post">
-                                      @csrf
-                                      <input type="hidden" name="event_id" value="{{$event->id}}">
-                                      <button class="btn btn-sm btn-outline-danger">Unregister</button>
-                                  </form>
-                                </li>
-                                @endforeach
-                            </ul>
-                            @else
-                                <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
-                            @endif
-                        </div>
+                                    @can('event_edit')
+                                    <a class="btn btn-xs btn-warning text-white"
+                                        href="{{ route('frontend.events.edit', $event->id) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                    @endcan
+
+                                    @can('event_delete')
+                                    <form action="{{ route('frontend.events.destroy', $event->id) }}" method="POST"
+                                        onsubmit="return confirm('{{ $event->events_count || $event->event ? 'Do you want to delete future recurring events, too?' : trans('global.areYouSure') }}');"
+                                        style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"
+                                            value="{{ trans('global.delete') }}">
+                                    </form>
+                                    @endcan
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @else
+                                    @can('event_delete')
+                                    <h6 class="p-4">No Events Created Yet <i class="fas fa-smile-o"></i> </h6>
+                                    @else
+                                    <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
+                                    @endcan
+                                @endif
+                            </div>   
+                        @else
+                            {{-- Events Registered --}}
+                            <div class="tab-pane fade" id="events-registered" role="tabpanel" aria-labelledby="events-registered-tab">
+                                @if($events->count() > 0)
+                                <ul class="list-group">
+                                    <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border-0">
+                                        Name
+                                        <i class="fa fa-map-marker pr-3"></i>
+                                        <i class="fa fa-calendar pr-2"></i>
+                                        <i class="fa fa-user-times"></i>
+                                    </li>
+                                    @foreach ($events as $event)
+                                    <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border shadow">
+                                    {{ucfirst($event->name)}}
+                                    <small>{{$event->location}}</small>
+                                    <span class="badge badge-primary badge-pill">{{$event->start_time}}</span>
+                                    <form action=" {{route('frontend.users.unregister')}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="event_id" value="{{$event->id}}">
+                                        <button class="btn btn-sm btn-outline-danger">Unregister</button>
+                                    </form>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @else
+                                    <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
+                                @endif
+                            </div>
+                        @endcan
                     </div>
                 </div>
             </div>

@@ -54,6 +54,7 @@ class Event extends Model
         'max_no_attendees',
         'status',
         'recurrence',
+        'profile',
         'created_at',
         'updated_at',
         'deleted_at',

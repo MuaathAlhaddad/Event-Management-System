@@ -792,7 +792,8 @@ section {
 #portfolio {
   background: white;
   padding: 20px 0;
-  height: 600px;
+  height: inherit;
+  min-height: 524px;
 }
 
 #portfolio #portfolio-flters {
@@ -815,6 +816,23 @@ section {
   transition: all ease-in-out 0.3s;
   background: #f7f7f7;
   border-radius: 4px;
+}
+#portfolio #portfolio-flters a {
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px 18px 14px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #666666;
+  margin: 0 5px 10px 5px;
+  transition: all ease-in-out 0.3s;
+  background: #f7f7f7;
+  border-radius: 4px;
+}
+#portfolio #portfolio-flters a:hover {
+  color: #fff;
+  background: #2dc997;
 }
 
 #portfolio #portfolio-flters li:hover, #portfolio #portfolio-flters li.filter-active {
