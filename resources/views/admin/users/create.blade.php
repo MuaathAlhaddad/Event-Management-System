@@ -2,14 +2,14 @@
 @section('content')
 @card_style()
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" style="color:purple!important;">
         {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
     </div>
 
     <div class="card-body">
         <form action="{{ route("admin.users.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @user_form()
+            @user_form() 
         </form>
     </div>
 </div>

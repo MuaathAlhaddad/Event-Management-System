@@ -1,4 +1,12 @@
-<div class="sidebar">
+<style>
+.nav-item :hover{
+    background-color:#404040!important;
+
+}
+</style>
+
+<div class="sidebar" style= "background-image: linear-gradient(to right top, #7705a4,#650180,#51025f,#3b0441,#260326)!important;">
+
     <nav class="sidebar-nav">
 
         <ul class="nav">

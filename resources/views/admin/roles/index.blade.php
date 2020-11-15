@@ -1,9 +1,20 @@
+<style>
+body{
+        background-color:#E6E6FA!important;
+}
+.card .btn{
+    background-color: #E6E6FA!important;
+    color: black;
+    border: none;
+}
+</style>
+
 @extends('layouts.admin')
 @section('content')
 @can('role_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.roles.create") }}">
+            <a class="btn btn-success" style="color:white; font-size:16px!important; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;" href="{{ route("admin.roles.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
             </a>
         </div>
@@ -50,18 +61,19 @@
                             </td>
                             <td>
                                 @foreach($role->permissions as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
+                                    <span class="badge badge-info" style=" color:#800080!important;background-color:#E6E6FA!important; font-size:14px!important;">{{ $item->title }}</span>
                                 @endforeach
                             </td>
                             <td>
                                 @can('role_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.roles.show', $role->id) }}">
+                                    <a class="btn btn-xs btn-primary" style="background-color:#BA55D3!important; border-color:#BA55D3; color:white!important; margin: 5px!important;" href="{{ route('admin.roles.show', $role->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
+                                
 
                                 @can('role_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.roles.edit', $role->id) }}">
+                                    <a class="btn btn-xs btn-info" style="background-color:#9400D3!important; border-color:#9400D3; color:white!important;margin: 5px!important;" href="{{ route('admin.roles.edit', $role->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
@@ -70,7 +82,7 @@
                                     <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" style="background-color:#663399!important; border-color:#663399; color:white!important; margin: 5px!important;" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
 

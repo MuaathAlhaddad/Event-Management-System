@@ -1,6 +1,28 @@
+<style>
+
+
+ li:active {
+background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+ }
+
+#portfolio-flters a:hover,section li:hover{
+background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+color: white!important;
+}
+
+/* #portfolio-flters a:link,section li,ul:link{
+  background-color: white!important;
+  border-color: black!important;
+  color:black!important;  
+} */
+
+  body{ background-color:#E6E6FA!important;
+  }
+</style>
+
 @extends('frontend.master' , ['page' => 'events_index'])
 @section('content')
-<section id="portfolio" class="portfolio" style="margin-top: 4rem;">
+<section id="portfolio" class="portfolio" style="margin-top: 4rem; background-color:#E6E6FA!important;">
     <div class="container" data-aos="fade-up">
       @if(session()->has('success'))
       <div class="alert alert-success">
@@ -22,8 +44,8 @@
           </ul>
         </div>
         
-        <div class="col-lg-2 float-right">
-          <ul id="portfolio-flters" class="float-right ">
+        <div class="col-lg-2 float-right" style="color:purple!important;">
+          <ul id="portfolio-flters" class="float-right" style="color:purple!important;">
             @can('event_create')
             <a href="{{route('frontend.events.create')}}"> Add Event </a>
             @endcan
@@ -37,11 +59,11 @@
         <div class="col-lg-4 col-md-6 portfolio-item filter-{{$event->category}}">
           
           <img src="{{ asset('storage/events/'.$event->profile) }}" class="img-fluid" alt="">
-          <div class="portfolio-info">
+          <div class="portfolio-info" style="background-color:purple!important;">
             <h4 class="d-inline-block ">{{$event->name}}
             </h4>
             @cannot('event_create')
-              @if (!$event->status && !in_array(Auth::id(), $event->attendees_ids))
+              @if (!$event->status && !in_array(Auth::id(), (array) $event->attendees_ids))
                 <form action="{{ route('frontend.users.register')}}" method="post">
                     @csrf
                     <input type="hidden" name="event_id" value="{{$event->id}}">

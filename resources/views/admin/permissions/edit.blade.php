@@ -23,7 +23,7 @@
                 </p>
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-danger" type="submit" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; border:none!important;" value="{{ trans('global.save') }}">
             </div>
         </form>
 

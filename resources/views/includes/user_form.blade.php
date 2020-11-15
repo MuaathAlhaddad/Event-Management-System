@@ -119,8 +119,8 @@
     <!-- role -->
     <div class="form-group col-sm-12 {{ $errors->has('roles') ? 'has-error' : '' }}">
         <label for="roles">{{ trans('cruds.user.fields.roles') }}*
-            <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
-            <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
+            <span class="btn btn-info btn-xs select-all" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;">{{ trans('global.select_all') }}</span>
+            <span class="btn btn-info btn-xs deselect-all" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;">{{ trans('global.deselect_all') }}</span></label>
         <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
             @foreach($roles as $id => $roles)
                 <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
@@ -136,5 +136,5 @@
         </p>
     </div>
     <div class="text-center">
-        <input class="btn btn-success w-25" style="font-weight: bold; font-family: system-ui;" type="submit" value="{{ trans('global.save') }}">
+        <input class="btn btn-success w-25" style="font-weight: bold; font-family: system-ui;background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;" type="submit" value="{{ trans('global.save') }}">
     </div>

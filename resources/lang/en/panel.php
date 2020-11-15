@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'site_title' => 'WAQAF',
+    'site_title' => 'IIUM WAQAF TIME MANAGEMENT',
 ];

@@ -25,18 +25,31 @@
     
 </head>
 
+<style>
+a:hover{
+  background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+}
+
+</style>
+
 <body class="app header-fixed sidebar-fixed aside-menu-fixed pace-done sidebar-lg-show">
-    <header class="app-header navbar">
+    <header class="app-header navbar" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;">
         <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href=" {{route('admin.dashboard')}} ">
-          <i class="fas fa-kaaba mr-2"></i>
+       {{--  <a class="navbar-brand" href=" {{route('admin.dashboard')}} ">
+          <i class="fas fa-kaaba mr-2"></i> 
             <span class="navbar-brand-full">{{ trans('panel.site_title') }}</span>
-        </a>
-        <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        </a> --}}
+
+ <div id="logo" class="pull-left" style="margin-left:5px!important;">   
+       <img src="{{ asset("frontend/assets/img/2.png")}}" alt="" width="50" height="50"> 
+       <h4 style=" margin: 5px; padding:5px; float:right; color:white" ><b> IIUM WAQAF TIME MANAGEMENT</b></h4></div>
+
+
+{{--         <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> --}}
 
         <ul class="nav navbar-nav ml-auto">
             @if(count(config('panel.available_languages', [])) > 1)
@@ -55,7 +68,7 @@
 
         <ul class="nav navbar-nav ml-auto ">
           <div class="btn-group mr-2">
-            <a  href="#" class="btn btn-outline-info dropdown-toggle text-capitalize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a  href="#" class="btn btn-outline-info dropdown-toggle text-capitalize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white!important; border-color: white!important;">
               {{Auth::user()->first_name ?? ''}}
             </a>
             <div class="dropdown-menu dropdown-menu-right ">

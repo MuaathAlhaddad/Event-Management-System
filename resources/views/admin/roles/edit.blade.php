@@ -1,8 +1,14 @@
+<style>
+body{
+    background-color:#E6E6FA!important;
+}
+</style>
+
 @extends('layouts.admin')
 @section('content')
 
 <div class="card">
-    <div class="card-header">
+    <div class="card-header" >
         {{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}
     </div>
 
@@ -24,8 +30,8 @@
             </div>
             <div class="form-group {{ $errors->has('permissions') ? 'has-error' : '' }}">
                 <label for="permissions">{{ trans('cruds.role.fields.permissions') }}*
-                    <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
-                    <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
+                    <span class="btn btn-info btn-xs select-all" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;">{{ trans('global.select_all') }}</span>
+                    <span class="btn btn-info btn-xs deselect-all" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;">{{ trans('global.deselect_all') }}</span></label>
                 <select name="permissions[]" id="permissions" class="form-control select2" multiple="multiple" required>
                     @foreach($permissions as $id => $permissions)
                         <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($role) && $role->permissions->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>
@@ -41,7 +47,7 @@
                 </p>
             </div>
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-danger" type="submit" style="background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;" value="{{ trans('global.save') }}">
             </div>
         </form>
 

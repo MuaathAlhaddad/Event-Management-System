@@ -41,9 +41,9 @@
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                        aria-controls="nav-profile" aria-selected="false">Profile</a>
+                        aria-controls="nav-profile" aria-selected="false" style=" color: purple;font-size:16px!important;"><b>Profile<b></a>
                     <a class="nav-item nav-link" id="more-info-tab" data-toggle="tab" href="#more-info" role="tab"
-                        aria-controls="more-info" aria-selected="false">More Info</a>
+                        aria-controls="more-info" aria-selected="false" style=" color: purple; font-size:16px!important;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More Info</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">
@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+            <a style="margin-top:20px; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important; color:white!important; border:none!important; font-size:14px!important;" class="btn btn-default"  href="{{ url()->previous() }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>

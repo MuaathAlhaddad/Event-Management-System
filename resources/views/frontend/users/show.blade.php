@@ -45,15 +45,14 @@
                 <div class="mb-2">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+                            <a class="nav-item nav-link" style=" color:purple!important; margin-right:15px!important;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
                                 role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-                            <a class="nav-item nav-link" id="more-info-tab" data-toggle="tab" href="#more-info"
+                            <a class="nav-item nav-link" style=" color:purple!important; margin-right:15px!important;" id="more-info-tab" data-toggle="tab" href="#more-info"
                                 role="tab" aria-controls="more-info" aria-selected="false">More Info</a>
                                 @can('event_create')
-                                    <a class="nav-item nav-link" id="events-created-tab" data-toggle="tab" href="#events-created"
-                                    role="tab" aria-controls="events-created" aria-selected="false">Events Created</a>
+                                    <a class="nav-item nav-link" style=" color:purple!important;margin-right:20px!important;" id="events-created-tab" data-toggle="tab" href="#events-created" role="tab" aria-controls="events-created" aria-selected="false">Events Created</a>
                                 @else
-                                <a class="nav-item nav-link" id="events-registered-tab" data-toggle="tab" href="#events-registered"
+                                <a class="nav-item nav-link" style=" color:purple!important;"  id="events-registered-tab" data-toggle="tab" href="#events-registered"
                                     role="tab" aria-controls="events-registered" aria-selected="false">Events Registered</a>
                                 @endcan
                         </div>
@@ -142,7 +141,7 @@
                                         </th>
                                         <td>
                                             @foreach($user->roles as $id => $roles)
-                                            <span class="label label-info label-many badge badge-pill badge-success">  {{ $roles->title }}</span>
+                                            <span class="label label-info label-many badge badge-pill badge-success" style="background-color:purple;">  {{ $roles->title }}</span>
                                             @endforeach
                                         </td>
                                     </tr>
@@ -179,16 +178,16 @@
                                     <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border shadow">
                                     {{ucfirst($event->name)}}
                                     <small>{{$event->location}}</small>
-                                    <span class="badge badge-primary badge-pill">{{$event->start_time}}</span>
+                                    <span class="badge badge-primary badge-pill" style="background-color: #F8CEEC; color:black;border-color:purple;">{{$event->start_time}}</span>
                                     @can('event_show')
-                                    <a class="btn btn-xs btn-primary"
+                                    <a class="btn btn-xs btn-primary" style="background-color:#BA55D3!important; border-color:#BA55D3; color:white!important; margin: 5px!important;"
                                         href="{{ route('frontend.events.show', $event->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                     @endcan
 
                                     @can('event_edit')
-                                    <a class="btn btn-xs btn-warning text-white"
+                                    <a class="btn btn-xs btn-warning text-white" style="background-color:#9400D3!important; border-color:#9400D3; color:white!important;margin: 5px!important;"
                                         href="{{ route('frontend.events.edit', $event->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
@@ -200,7 +199,7 @@
                                         style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger"
+                                        <input type="submit" class="btn btn-xs btn-danger" style="background-color:#663399!important; border-color:#663399; color:white!important; margin: 5px!important;"
                                             value="{{ trans('global.delete') }}">
                                     </form>
                                     @endcan
@@ -230,11 +229,11 @@
                                     <li class=" mt-3 list-group-item d-flex justify-content-between align-items-center border shadow">
                                     {{ucfirst($event->name)}}
                                     <small>{{$event->location}}</small>
-                                    <span class="badge badge-primary badge-pill">{{$event->start_time}}</span>
+                                    <span class="badge badge-primary badge-pill" style="background-color: #F8CEEC; color:black;border-color:purple;">{{$event->start_time}}</span>
                                     <form action=" {{route('frontend.users.unregister')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="event_id" value="{{$event->id}}">
-                                        <button class="btn btn-sm btn-outline-danger">Unregister</button>
+                                        <button class="btn btn-sm btn-outline-danger" style="color:purple;border-color:purple;">Unregister</button>
                                     </form>
                                     </li>
                                     @endforeach

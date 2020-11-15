@@ -31,14 +31,14 @@
     
 </style>
 
-<section id="portfolio" class="portfolio" style="margin-top: 4rem; height: 850px; ">
+<section id="portfolio" class="portfolio" style="margin-top: 4rem; height: 850px; color:black;">
     <div class="container" data-aos="fade-up">
         <div class="card" >
-            <div  class=" display-4" style=" color: #2dc997;">
+            <div  class=" display-4" style=" color: purple!important;">
                 {{ trans('global.create') }} {{ trans('cruds.user.title_singular') }}
             </div>
 
-            <div class="card-body" style="border: 1px solid #2dc997;">
+            <div class="card-body" style="border: 1px solid purple;">
                 <form action="{{ route("frontend.users.store") }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @user_form()

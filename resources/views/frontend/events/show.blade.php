@@ -5,7 +5,7 @@
       
       <div class="section-header">
         <div class="float-left">
-            <button class=" btn" onclick="window.history.back()" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">
+            <button class=" btn" onclick="window.history.back()" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color:purple; border-color:purple; {{-- {{config('styles.frontend.colors.primary')}} --}}">
                 Back
             </button>
         </div>
@@ -16,7 +16,7 @@
         @if (isset($event))    
         <div class="card shadow">
           <div class="card-body section-header">
-              <h5 class="card-title section-title" style="padding: 10px; color: {{config('styles.frontend.colors.primary')}}">{{$event->name}}</h5>
+              <h5 class="card-title section-title" style="padding: 10px; color:purple!important; {{-- {{config('styles.frontend.colors.primary')}} --}}">{{$event->name}}</h5>
                   <table class="table table-borderless">
                       <tr>
                           <th>Category</th>
@@ -65,7 +65,7 @@
           </div>
           @cannot('event_create')
             @if (in_array(Auth::id(), $event->attendees_ids))
-                <div class="card-footer text-center" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color: {{config('styles.frontend.colors.primary')}}">
+                <div class="card-footer text-center" style="border: 1px solid {{config('styles.frontend.colors.primary')}}; color:purple; {{-- {{config('styles.frontend.colors.primary')}} --}}">
                     You are Registered in this Event
                 </div>
             @else    

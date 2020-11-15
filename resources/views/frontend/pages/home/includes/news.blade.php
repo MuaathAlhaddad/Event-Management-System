@@ -1,4 +1,4 @@
-<section id="team">
+<section id="team" style="background-color:#E6E6FA;!important">
     <div class="container" data-aos="fade-up">
       <div class="section-header">
         <h3 class="section-title">News</h3>
@@ -36,7 +36,7 @@
       </div>
       <div class="section-footer float-right mt-4">
           <a href="{{ route('frontend.news')}} " class="btn"
-          style=" color: #2dc997; border: 1px solid #2dc997">see more >></a>
+          style=" color: purple; border: 1px solid purple">see more >></a>
       </div>
     </div>
   </section>

@@ -1,10 +1,26 @@
 @extends('frontend.master', ['page' => 'home'])
 @section('content')
+
+
+<style>
+#hero{
+   background-image: url('frontend/assets/img/33.jpg')!important;
+}
+
+.btn-get-started:hover {
+
+  background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+  border:none!important;
+  color: white!important;
+}
+
+</style>
+
 <!-- ======= Hero Section ======= -->
 <section id="hero">
     <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
         <h1>Welcome to IIUM WAQAF TIME MANAGEMENT</h1>
-        <h2>Where <span class=" text-warning font-weight-bold">Event Management</span> is fun!</h2>
+        <h2>Where <span class=" text-warning font-weight-bold" style="color:#DA70D6!important;">Event Management</span> is fun!</h2>
         <a href="{{route('frontend.events.index')}}" class="btn-get-started">Get Started</a>
     </div>
 </section>
@@ -12,7 +28,7 @@
 
 <main id="main">
     <!-- ======= About Section ======= -->
-    <section id="about">
+    <section id="about" style="background-color:#E6E6FA;!important">
         <div class="container" data-aos="fade-up">
             <div class="row about-container">
 
@@ -44,7 +60,7 @@
     </section><!-- End About Section -->
 
     <!-- ======= Events Section ======= -->
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio"    style="background-color:#E6E6FA;!important">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h3 class="section-title">Events</h3>
@@ -66,7 +82,7 @@
             </div>
             <div class="row float-right">
               <a href="{{ route('frontend.events.index')}} " class="btn"
-                  style=" color: #2dc997; border: 1px solid #2dc997">see more >></a>
+                  style=" color: purple; border: 1px solid purple">see more >></a>
           </div>
 
         </div>

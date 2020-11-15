@@ -3,13 +3,13 @@
 return [
     'admin' => [
         'colors' => [
-            'primary'         => '#0D93C5',
+            'primary'         => 'purple',
             'secondary'         => '#FFC439'
         ]
     ],
     'frontend' => [
         'colors' => [
-            'primary'       => '#2dc997'
+            'primary'       => 'purple'
         ]
     ]
 ];

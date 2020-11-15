@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
                     'password'       => Hash::make('admin'),
                     'remember_token' => null,
                 ], 
-                [
+                 [
                     'id'             => 2,
                     'first_name'           => 'Ali',
                     'last_name'           => 'Alwani',
@@ -109,7 +109,7 @@ class UsersTableSeeder extends Seeder
                     'gender'          => 'f',
                     'password'       => Hash::make('muna'),
                     'remember_token' => null,
-                ],
+                ], 
             ],
         ];
 

@@ -1,15 +1,27 @@
+<style>
+
+  #header{background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+  }
+header{
+  color: white!important;
+}
+
+</style>
 @if ($page == 'home')
-  <header id="header" class="header-transparent">
+  <header id="header"    style="height: 65px!important; padding: 12px 0;"    class="header-transparent">
 @else
-  <header id="header" style="height: 60px; padding: 14px 0;">
+  <header id="header" style="height: 65px!important; padding: 12px 0;">
 @endif
     <div class="container">
-      <div id="logo" class="pull-left">          
-        <h1 class="p-0"><a href="{{ route('frontend.home')}}">WAQAF</a></h1>
+      <div id="logo" class="pull-left" style="margin-left:-60px!important; margin-top:-5px!important;">   
+       <img src="{{ asset("frontend/assets/img/2.png")}}" alt="" width="50" height="50"> 
+       <h4 style=" margin: 4px; padding:4px; float:right; background-:white!important;" ><b> IIUM WAQAF TIME MANAGEMENT</b></h4>
+
+  {{-- <h1 class="p-0"><a href="{{ route('frontend.home')}}">WAQAF</a></h1> --}}
       </div>
 
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
+      <nav id="nav-menu-container" style="color:black!important;" >
+        <ul class="nav-menu" >
           <li class="menu-active"><a href="{{ route('frontend.home')}}">Home</a></li>
           @if ($page == 'home')  
           <li><a href="#about">About Us</a></li>

@@ -4,8 +4,8 @@
     <div class="col-md-6">
         <div class="card mx-4">
             <div class="card-body p-4">
-                <h1>{{ trans('panel.site_title') }}</h1>
-
+{{--                 <h1>{{ trans('panel.site_title') }}</h1>
+ --}}           <h1> IIUM WAQAF TIME MANAGEMENT </h1>
                 <p class="text-muted">{{ trans('global.reset_password') }}</p>
 
                 <form method="POST" action="{{ route('password.request') }}">
@@ -22,8 +22,8 @@
                             </div>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <input id="password" type="password" name="password" class="form-control" required placeholder="{{ trans('global.login_password') }}">
+                    <div class="form-group" >
+                        <input id="password" type="password" name="password"  class="form-control" required placeholder="{{ trans('global.login_password') }}">
 
                         @if($errors->has('password'))
                             <div class="invalid-feedback">
@@ -31,15 +31,15 @@
                             </div>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <input id="password-confirm" type="password" name="password_confirmation" class="form-control" required placeholder="{{ trans('global.login_password_confirmation') }}">
                     </div>
 
-                    <div class="row">
+{{--                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">
+                            <button type="submit"  class="btn btn-primary btn-block btn-flat">
                                 {{ trans('global.reset_password') }}
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                 </form>
