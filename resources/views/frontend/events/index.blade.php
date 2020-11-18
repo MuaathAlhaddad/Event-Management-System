@@ -25,9 +25,14 @@ color: white!important;
 <section id="portfolio" class="portfolio" style="margin-top: 4rem; background-color:#E6E6FA!important;">
     <div class="container" data-aos="fade-up">
       @if(session()->has('success'))
-      <div class="alert alert-success">
-          {{ session()->get('success') }}
-      </div>
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+      @endif
+      @if(session()->has('fail'))
+        <div class="alert alert-danger">
+            {{ session()->get('fail') }}
+        </div>
       @endif
       <div class="section-header">
         <h3 class="section-title">Events</h3>

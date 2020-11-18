@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 Auth::routes(['register' => false]);
@@ -22,6 +24,10 @@ Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
         
     });
 });
+Route::post('setMaxPoints',function (Request $request) {
+    $max_points = DB::table('admin_rules')->whereNotNull('max_star_points')->update(['max_star_points' => $request->max_points]);
+    return response()->json(['msg' => 'Max Points Set successfully', 'max_points' =>  DB::table('admin_rules')->whereNotNull('max_star_points')->pluck('max_star_points')->first()]);
+})->name('setMaxPoints');
 
 // ================================== //
         /** Admin Dashboard */       

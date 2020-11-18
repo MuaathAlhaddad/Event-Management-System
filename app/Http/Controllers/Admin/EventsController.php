@@ -24,8 +24,7 @@ class EventsController extends Controller
         
         $events = Event::withCount('events')->get();
         foreach ($events as $key => $event) {
-            dump(Date::now());
-            if (Date::now() > $event->end_time ) {
+            if (Carbon::now() > $event->end_time ) {
                 $event->delete();
             } 
         }
