@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->boolean('status')->default(false);
             $table->text('desc')->nullable();
             $table->string('category')->nullable();            
+            $table->string('semester');
             $table->datetime('start_time');
             $table->datetime('end_time');
             $table->string('recurrence');

@@ -16,7 +16,11 @@ color: white!important;
   color:black!important;  
 } */
 
-  body{ background-color:#E6E6FA!important;
+  body{ 
+    background-color:#E6E6FA!important;
+  }
+  #portfolio .portfolio-item img { 
+    min-height: 250px;
   }
 </style>
 
@@ -84,7 +88,8 @@ color: white!important;
 
             <a href="{{ route('frontend.events.show', $event->id )}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
             <p>{{$event->desc}}</p>
-            <p class="mt-3"> <i class="fa fa-calendar pr-2"></i> {{$event->start_time}}</p>
+            <p class="mt-3"> <i class="fa fa-calendar pr-2"></i> {{$event->start_time}} </p>
+            <p> <i class="fa fa-book pr-2"></i> {{$event->semester}}</p>
             <p> <i class="fa fa-map-marker pr-3"></i> {{$event->location}}</p>
           </div>
         </div>

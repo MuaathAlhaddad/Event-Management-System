@@ -228,7 +228,7 @@
     <!-- start_time & end_time -->
     <div class="form-row col-sm-12">
         <!-- start_time -->
-        <div class="form-group col-sm-6 {{ $errors->has('start_time') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-4 {{ $errors->has('start_time') ? 'has-error' : '' }}">
             <label for="start_time">{{ trans('cruds.event.fields.start_time') }}*</label>
             <input type="text" id="start_time" name="start_time" class="form-control datetime {{ $errors->has('start_time') ? 'border-danger' : '' }}" value="{{ old('start_time', isset($event) ? $event->start_time : '') }}" required>
             @if($errors->has('start_time'))
@@ -242,7 +242,7 @@
         </div>
 
         <!-- end_time -->
-        <div class="form-group col-sm-6 {{ $errors->has('end_time') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-4 {{ $errors->has('end_time') ? 'has-error' : '' }}">
             <label for="end_time">{{ trans('cruds.event.fields.end_time') }}*</label>
             <input type="text" id="end_time" name="end_time" class="form-control datetime {{ $errors->has('end_time') ? 'border-danger' : '' }}" value="{{ old('end_time', isset($event) ? $event->end_time : '') }}" required>
             @if($errors->has('end_time'))
@@ -253,6 +253,25 @@
             <p class="helper-block">
                 {{ trans('cruds.event.fields.end_time_helper') }}
             </p>
+        </div>
+
+        <!-- Semester -->
+        <div class="form-group col-sm-4 {{ $errors->has('semester') ? 'has-error' : '' }}">
+            <label for="semester">Semester:*</label>
+            <select id="semester" name="semester" class="form-control {{ $errors->has('semester') ? 'border-danger' : '' }}">
+                <option selected value="">Choose...</option>
+                @foreach(App\Event::SEMESTERS as $key => $semester)
+                     
+                <option {{(old('semester', isset($event) ? $event->semester : '') === $semester) ? 'selected' : ''}} value="{{$semester}}">
+                        {{ $semester }}
+                    </option>
+                @endforeach
+            </select>
+            @if($errors->has('semester'))
+                <em class="invalid-feedback">
+                    {{ $errors->first('semester') }}
+                </em>
+            @endif
         </div>
     </div>
 

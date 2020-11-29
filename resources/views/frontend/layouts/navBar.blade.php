@@ -52,9 +52,7 @@ header{
           <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
           </form>
-
-          
-          
+         
           @endauth
         </ul>
       </nav><!-- #nav-menu-container -->

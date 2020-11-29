@@ -32,16 +32,26 @@ class Event extends Model
     ];
 
     const CATEGORIES = [
-        'lectures'    => 'Lectures',
-        'sports'   => 'Sports',
-        'charities'  => 'Charities',
-        'fairs' => 'Fairs',
+        'lectures'  => 'Lectures',
+        'sports'    => 'Sports',
+        'charities' => 'Charities',
+        'fairs'     => 'Fairs',
         'festivals' => 'Festivals',
-        'cultures' => 'Cultures',
+        'cultures'  => 'Cultures',
+    ];
+
+    const SEMESTERS = [
+        'II-2021'    => 'SEMESTER II, 2021/2022',
+        'I-2021'    => 'SEMESTER I, 2021/2022',
+        'II-2020'    => 'SEMESTER II, 2020/2021',
+        'I-2020'    => 'SEMESTER I, 2020/2021',
+        'II-2019'    => 'SEMESTER II, 2019/2020',
+        'I-2019'    => 'SEMESTER I, 2019/2020',
     ];
 
     protected $fillable = [
         'name',
+        'semester',
         'start_time',
         'end_time',
         'event_id',
