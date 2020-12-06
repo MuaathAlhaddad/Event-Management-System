@@ -24,6 +24,10 @@ Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
         
     });
 });
+
+// ================================== //
+        /** Ajax Request */       
+// ================================= //
 Route::post('setMaxPoints',function (Request $request) {
     $max_points = DB::table('admin_rules')->whereNotNull('max_star_points')->update(['max_star_points' => $request->max_points]);
     if($max_points == 0) {
