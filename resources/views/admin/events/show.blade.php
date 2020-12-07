@@ -93,7 +93,7 @@
                 </tbody>
             </table>
 
-            <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">
+            <a style="margin-top:20px; color:white; font-size:16px!important; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;" class="btn btn-default" href="{{ url()->previous() }}">
                 {{ trans('global.back_to_list') }}
             </a>
         </div>

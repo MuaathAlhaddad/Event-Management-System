@@ -45,18 +45,30 @@ class UsersController extends Controller
         $pointsInSem = Event::select(DB::raw('sum(points) as points_earned'))->where('semester', '=', $event->semester)
                         ->whereJsonContains('attendees_ids', request()->user_id)
                         ->groupBy('semester')->first();
+                        
 
         // validate that a user hasn't exceeded the max points limit
         $max_points =  DB::table('admin_rules')->whereNotNull('max_star_points')->pluck('max_star_points')->first();
-        
-        $pointsInSem->points_earned += $event->points;
-        if($pointsInSem->points_earned > $max_points) {
-            $user->save();
-            $event->save();
-            return redirect()->back()->with('fail' ,'You can not register anymore events this semester');
+        if(isset($pointsInSem)) {
+            $pointsInSem->points_earned += $event->points;
+            if($pointsInSem->points_earned > $max_points) {
+                $user->save();
+                $event->save();
+                return redirect()->back()->with('fail' ,'You can not register anymore events this semester');
+            }
+        } else {
+            if($event->points > $max_points) {
+                $user->save();
+                $event->save();
+                return redirect()->back()->with('fail' ,'You can not register anymore events this semester');
+            }
         }
         
-        $user->points_earned = $pointsInSem->points_earned;
+        if(isset($pointsInSem)) {
+            $user->points_earned = $pointsInSem->points_earned;
+        } else {
+            $user->points_earned = $event->points;
+        }
         $user->save();
         $attendees = $event->attendees_ids ?? [];
         array_push($attendees, request()->user_id);

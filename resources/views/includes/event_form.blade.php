@@ -8,11 +8,11 @@
 
         .recurrence-btn .recurrence-label {
             display: block;
-            background: #ffdb99;
-            color: #444;
+            background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;
+            color: white!important;
             border-radius: 5px;
             padding: 10px 20px;
-            border: 2px solid #ffc966;
+            border: 2px solid black;
             margin-bottom: 5px;
             cursor: pointer;
         }
@@ -26,7 +26,7 @@
             width: 20px;
             height: 20px;
             border-radius: 3px;
-            background: #ffc04d;
+            background: white;
         }
 
         .recurrence-btn .recurrence-label:before {
@@ -50,14 +50,14 @@
         }
 
         .recurrence-btn input[type="radio"]:checked+label {
-            background: #ffc04d;
+            background: white;
             animation-name: blink;
             animation-duration: 1s;
-            border-color: orange;
+            border-color: white;
         }
 
         .recurrence-btn input[type="radio"]:checked+label:after {
-            background: orange;
+            background:#BA55D3!important;;
         }
 
         .recurrence-btn input[type="radio"]:checked+label:before {
@@ -72,8 +72,8 @@
         .file-upload-btn {
             width: 100%;
             margin: 0;
-            color: #fff;
-            background: #1FB264;
+            color: white;
+            background: white ;
             border: none;
             padding: 10px;
             border-radius: 4px;
@@ -85,7 +85,7 @@
         }
 
         .file-upload-btn:hover {
-            background: #1AA059;
+            background: purple;
             color: #ffffff;
             transition: all .2s ease;
             cursor: pointer;
@@ -119,18 +119,18 @@
 
         .image-dropping,
         .image-upload-wrap:hover {
-            color: #ffc966;
+            color: white!important;
             background-color: rgb(233, 231, 231);
             border: 2px dashed #ffc966;
         }
         .image-dropping,
         .image-upload-wrap:hover .drag-text i {
-            color: orange;
+            color: purple;
         }
 
         .image-dropping,
         .image-upload-wrap:hover .drag-text h3 {
-            color: orange;
+            color: purple;
         }
 
         .image-title-wrap {
@@ -145,12 +145,12 @@
         .drag-text h3 {
             font-weight: 100;
             text-transform: uppercase;
-            color: #15824B;
+            color: purple;
             padding: 0 20px;
         }
         .drag-text i {
             font-size: 5rem;
-            color: #15824B;
+            color: purple;
         }
 
         .file-upload-image {
@@ -188,7 +188,7 @@
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
     <!-- name & category-->
-    <div class="form-row col-sm-12">
+    <div class="form-row col-sm-12" style="font-size:16px">
         <!-- name -->
         <div class="form-group col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }}">
             <label for="name">{{ trans('cruds.event.fields.name') }}*</label>
@@ -226,7 +226,7 @@
     </div>
 
     <!-- start_time & end_time -->
-    <div class="form-row col-sm-12">
+    <div class="form-row col-sm-12" style="font-size:16px">
         <!-- start_time -->
         <div class="form-group col-sm-4 {{ $errors->has('start_time') ? 'has-error' : '' }}">
             <label for="start_time">{{ trans('cruds.event.fields.start_time') }}*</label>
@@ -256,7 +256,7 @@
         </div>
 
         <!-- Semester -->
-        <div class="form-group col-sm-4 {{ $errors->has('semester') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-4 {{ $errors->has('semester') ? 'has-error' : '' }}" style="font-size:16px">
             <label for="semester">Semester:*</label>
             <select id="semester" name="semester" class="form-control {{ $errors->has('semester') ? 'border-danger' : '' }}">
                 <option selected value="">Choose...</option>
@@ -276,7 +276,7 @@
     </div>
 
     <!-- location & desc -->
-    <div class="form-row col-sm-12">
+    <div class="form-row col-sm-12" style="font-size:16px">
         <!-- location -->
         <div class="form-group col-sm-6 {{ $errors->has('location') ? 'has-error' : '' }}">
             <label for="location">{{ trans('cruds.event.fields.location') }}*</label>
@@ -306,7 +306,7 @@
     </div>
 
     <!-- points & max_no_attendees -->
-    <div class="form-row col-sm-12">
+    <div class="form-row col-sm-12" style="font-size:16px">
         <!-- points -->
         <div class="form-group col-sm-6 {{ $errors->has('points') ? 'has-error' : '' }}">
             <label for="points">{{ trans('cruds.event.fields.points') }}*</label>
@@ -321,7 +321,7 @@
             </p>
         </div>
         <!-- max_no_attendees -->
-        <div class="form-group col-sm-6 {{ $errors->has('max_no_attendees') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6 {{ $errors->has('max_no_attendees') ? 'has-error' : '' }}" style="font-size:16px">
             <label for="max_no_attendees">{{ trans('cruds.event.fields.max_no_attendees') }}*</label>
             <input type="number" id="max_no_attendees" name="max_no_attendees" class="form-control {{ $errors->has('max_no_attendees') ? 'border-danger' : '' }}" value="{{ old('max_no_attendees', isset($event) ? $event->max_no_attendees : '') }}" required>
             @if($errors->has('max_no_attendees'))
@@ -337,7 +337,7 @@
 
     @can('user_create')    
     <!-- Add  Attendees -->
-    <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}">
+    <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}" style="font-size:16px">
         <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}*</label>        
         <select name="attendees_ids[]" id="attendees_ids" data-live-search="true" data-max-options="5" class="form-control selectpicker" multiple="multiple">
             @foreach(App\User::all() as $key => $user)
@@ -354,7 +354,7 @@
     </div>
     @endcan
      <!-- recurrence -->
-    <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}">
+    <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}" style="font-size:16px">
         <label>{{ trans('cruds.event.fields.recurrence') }}*</label>
         @foreach(App\Event::RECURRENCE_RADIO as $key => $label)
         <div class="recurrence-btn">                                        
@@ -390,7 +390,7 @@
             </div>
         </div>
     <div class="text-center">
-        <input class="btn btn-success w-25" style="font-weight: bold; font-family: system-ui;" type="submit" value="{{ trans('global.save') }}">
+        <input class="btn btn-success w-25" style="font-weight: bold; font-family: system-ui; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;" type="submit" value="{{ trans('global.save') }}">
     </div>
 
     

@@ -1,9 +1,27 @@
+
+<style>
+body{
+        background-color:#E6E6FA!important;
+}
+.card .btn{
+    background-color: #E6E6FA!important;
+    color: black;
+    border: none;
+}
+a :hover{
+    background-color:white!important;
+    color: white!important;
+
+}
+</style>
+
+
 @extends('layouts.admin')
 @section('content')
 @can('event_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12 ">
-            <a class="btn btn-success text-capitalize font-weight-bold" href="{{ route("admin.events.create") }}">
+            <a class="btn btn-success text-capitalize font-weight-bold"  style="color:white; font-size:16px!important; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;"  href="{{ route("admin.events.create") }}">
                 <i class="fas fa-plus mr-2"></i> {{ trans('global.add') }} {{ trans('cruds.event.title_singular') }}
             </a>
         </div>
@@ -12,12 +30,12 @@
 @card_style()
 <div class="card">
     <div class="card-header">
-        <span class=" text-uppercase font-weight-bold" >
+        <span class=" text-uppercase font-weight-bold">
             {{ trans('cruds.event.title_singular') }} {{ trans('global.list') }}
         </span> 
     </div>
 
-    <div class="card-body">
+    <div class="card-body" style="background-color:white!important;">
         <div class="table-responsive">
             <table class=" table table-bordered text-center table-striped table-hover datatable datatable-Event">
                 <thead>
@@ -51,13 +69,13 @@
                             </td>
                             <td class="text-capitalize">
                                 @can('event_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.events.show', $event->id) }}">
+                                    <a class="btn btn-xs btn-primary"  style="background-color:#BA55D3!important; border-color:#BA55D3; color:white!important;"  href="{{ route('admin.events.show', $event->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
                                 @can('event_edit')
-                                    <a class="btn btn-xs btn-warning text-white" href="{{ route('admin.events.edit', $event->id) }}">
+                                    <a class="btn btn-xs btn-warning text-white" style="background-color:#9400D3!important; border-color:#9400D3; color:white!important;" href="{{ route('admin.events.edit', $event->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
@@ -69,7 +87,7 @@
                                     >
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"  style="background-color:#663399!important; border-color:#663399; color:white!important;" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
                             </td>
