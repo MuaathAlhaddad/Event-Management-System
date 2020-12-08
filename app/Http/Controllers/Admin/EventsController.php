@@ -42,7 +42,10 @@ class EventsController extends Controller
     public function store(StoreEventRequest $request)
     {
         $event = $request->all();
-        $event["moderator_id"] = Auth::id();
+        $path = $request->file('profile')->store('public/events');
+        $profile = basename($path);
+        $event["profile"] = $profile; 
+        $event["moderator_id"] = Auth::id(); 
 
         // Calculate Percentage
         $attendees = count( (array) $request->attendees_ids);
