@@ -56,12 +56,6 @@ class UsersController extends Controller
                 $event->save();
                 return redirect()->back()->with('fail' ,'You can not register anymore events this semester');
             }
-        } else {
-            if($event->points > $max_points) {
-                $user->save();
-                $event->save();
-                return redirect()->back()->with('fail' ,'You can not register anymore events this semester');
-            }
         }
         
         if(isset($pointsInSem)) {

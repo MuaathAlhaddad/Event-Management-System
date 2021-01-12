@@ -17,8 +17,8 @@ class HomeController
                                     ->get()->toArray();
 
         //get no of events for each month 
-        $EventsMonth = Event::selectRaw("DATE_FORMAT(created_at, '%b %Y') as month, COUNT(*) no_events")
-                        ->groupBy('created_at')
+        $EventsMonth = Event::selectRaw("DATE_FORMAT(start_time, '%b %Y') as month, COUNT(*) no_events")
+                        ->groupBy('month')
                         ->get()->toArray();
 
 

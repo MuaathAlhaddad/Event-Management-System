@@ -19,12 +19,16 @@ class EventsController extends Controller
 {
     public function index()
     {
-        
+        //abort-if   (HTTP exception)
+        //Gate::     (to authorize an action)
+        //foreach    (loop)
+        //carbon     (DateTime class)
+        //compact()  (Create an array from variables and their values)
         abort_if(Gate::denies('event_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
         $events = Event::withCount('events')->get();
         foreach ($events as $key => $event) {
-            if (Carbon::now() > $event->end_time ) {
+            if (Carbon::now('Asia/Singapore') > $event->end_time ) {
                 $event->delete();
             } 
         }
@@ -78,7 +82,6 @@ class EventsController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
         $event->update($request->all());
-
         return redirect()->route('admin.systemCalendar');
     }
 

@@ -184,6 +184,9 @@
             border: 0;
             transition: all .2s ease;
         }
+        div{
+            color:purple;
+        }
     </style>
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
@@ -338,7 +341,7 @@
     @can('user_create')    
     <!-- Add  Attendees -->
     <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}" style="font-size:16px">
-        <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}*</label>        
+        <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}</label>        
         <select name="attendees_ids[]" id="attendees_ids" data-live-search="true" data-max-options="5" class="form-control selectpicker" multiple="multiple">
             @foreach(App\User::all() as $key => $user)
                 <option value="{{$user->id}}" {{ (in_array($user->id, (array) old('attendees_ids', isset($event) ? $event->attendees_ids : ''))) ? 'selected' : '' }}> 
@@ -350,9 +353,9 @@
             <em class="invalid-feedback">
                 {{ $errors->first('attendees_ids') }}
             </em>
-        @endif
-    </div>
-    @endcan
+        @endif 
+    </div>   
+    @endcan 
      <!-- recurrence -->
     <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}" style="font-size:16px">
         <label>{{ trans('cruds.event.fields.recurrence') }}*</label>

@@ -3,16 +3,19 @@
 body{
         background-color:#E6E6FA!important;
 }
+
 .card .btn{
     background-color: #E6E6FA!important;
-    color: black;
+    color: black!important;
     border: none;
 }
-a :hover{
-    background-color:white!important;
-    color: white!important;
 
+a, .card :hover{
+border-color: white!important;
+color:white!important;
 }
+
+
 </style>
 
 

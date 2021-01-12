@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 @card_style()
+
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
@@ -17,7 +18,7 @@
                             </div>
                         @endif
                             <span class="text-capitalize" style=" font-size:18px;">
-                               Welcome
+                               Welcome &nbsp;
                             </span>
                             <span class="text-warning font-weight-bold" style="color: purple!important; font-size: 18px;">
                                 {{Auth::user()->first_name ?? ''}}
@@ -28,16 +29,19 @@
                         <table class="columns table">
                             <tr>
                                 <td>
-                                    <div id="piechart_div" style="border: 1px solid #ccc"></div>
+                                    <div id="piechart_div" {{-- style="border: 1px solid #ccc" --}}></div>
                                 </td>
                                 <td>
-                                    <div id="barchart_div" style="border: 1px solid #ccc"></div>
+                                    <div id="barchart_div" {{-- style="border: 1px solid #ccc" --}}></div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <div id="events_month_graph" style="border: 1px solid #ccc"></div>
+                                    <div id="events_month_graph" {{-- style="border: 1px solid #ccc" --}}></div>
                                 </td>
+                                    <div id="events_student_graph" {{-- style="border: 1px solid #ccc" --}}></div>
+
+
                             </tr>
                         </table>
                     </div>
@@ -48,7 +52,8 @@
 </div>
 @endsection
 @section('scripts')
-@parent       
+@parent  
+
    
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -111,8 +116,8 @@
                 title: 'No of student registered for each event',
                 width: 400,
                 height: 300,
-                legend: 'none',
                 backgroundColor: '#E4E4E4',
+                legend: 'none',
                 vAxis: {minValue: 0}
             };
             // create the graph
@@ -141,6 +146,8 @@
             var barchart = new google.visualization.ColumnChart(document.getElementById('events_month_graph'));
             barchart.draw(events_month, events_month_options);
       }
+
+
 
 </script>
 @endsection

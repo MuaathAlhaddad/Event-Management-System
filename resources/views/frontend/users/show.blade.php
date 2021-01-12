@@ -39,10 +39,10 @@
             </div>
         
             <div class="card-body" style="position: absolute;
-            top: 80px;
-            margin-top: 30px;
-            width: 700px;">
-                <div class="mb-2">
+                        top: 80px;
+                        margin-top: 30px;
+                        width: 700px;">
+                    <div class="mb-2">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link" style=" color:purple!important; margin-right:15px!important;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
@@ -54,10 +54,16 @@
                                 @else
                                 <a class="nav-item nav-link" style=" color:purple!important;"  id="events-registered-tab" data-toggle="tab" href="#events-registered"
                                     role="tab" aria-controls="events-registered" aria-selected="false">Events Registered</a>
+                                
+                                <a class="nav-item nav-link" style=" color:purple!important;"  id="events-history-tab" data-toggle="tab" href="#history"
+                                role="tab" aria-controls="events-history" aria-selected="false">History</a>
                                 @endcan
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
+                    
+
+                  
                         {{-- profile Tab --}}
                         <div class="tab-pane fade show active" id="nav-profile" role="tabpanel"
                             aria-labelledby="nav-profile-tab">
@@ -242,6 +248,11 @@
                                     <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
                                 @endif
                             </div>
+
+                            {{-- History  --}}
+                        <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+
+                        </div>
                         @endcan
                     </div>
                 </div>

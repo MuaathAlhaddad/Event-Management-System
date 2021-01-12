@@ -32,7 +32,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row about-container">
 
-                <div class="col-lg-6 content order-lg-1 order-2">
+                <div class="col-lg-6 content order-lg-1 order-2"><br>
                     <h2 class="title">Few Words About Us</h2>
                     <p>
                         IIUM WAQF MANAGEMENT is one of the volunteering platforms that connect students to people to
@@ -70,9 +70,11 @@
             <div class="row" data-aos="fade-up" data-aos-delay="200" style="margin-top: 150px">
                 @if (isset($events))
                 @foreach ($events as $event)
-                <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-                    <img src="{{ asset("frontend/assets/img/12.jpg")}}" class="img-fluid" alt="">
-                    <div class="portfolio-info">
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app">                   
+                <img src="{{ asset('storage/events/'.$event->profile) }}" class="img-fluid" alt=""style="height:250px;">
+
+                    
+                       <div class="portfolio-info">
                         <h4>{{$event->name}}</h4>
                         <p>{{$event->desc}}</p>
                     </div>

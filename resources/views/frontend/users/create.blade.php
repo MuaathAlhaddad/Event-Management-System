@@ -22,10 +22,10 @@
         align-items: center;
     }
     .form-control{
-        border: 1px solid #2dc997;
+        border: 1px solid purple;
     }
     .select-all, .deselect-all{
-        border: 1px solid #2dc997;
+        border: 1px solid purple;
         background: #2dc997;
     }
     

@@ -15,7 +15,7 @@ class CreateAdminRulesTable extends Migration
     {
         Schema::create('admin_rules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('max_star_points');
+            $table->integer('max_star_points')->default(5);
             $table->timestamps();
         });
     }

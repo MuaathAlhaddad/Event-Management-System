@@ -4,9 +4,16 @@ body{
 }
 .card .btn{
     background-color: #E6E6FA!important;
-    color: black;
+    color: black!important;
     border: none;
 }
+
+a, .card :hover{
+border-color: white!important;
+color:white!important;
+}
+
+
 </style>
 
 @extends('layouts.admin')

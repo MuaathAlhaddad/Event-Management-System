@@ -32,10 +32,10 @@
                         </th>
                         <td>
                             @php
-                                $moderator = App\User::find($event->moderator_id)->first();
-                            @endphp
+                            $moderator = App\User::find($event->moderator_id); 
+                            @endphp 
                             {{ $moderator->first_name ?? '' }}
-                            {{ $moderator->last_name ?? '' }}
+                            {{ $moderator->last_name ?? '' }} 
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +66,7 @@
             </table>
             <h5>Registered Students</h5>
             @php
-                $registered_users = App\User::whereIn('id', [$event->attendees_ids])->get();
+                $registered_users = App\User::whereIn('id', $event->attendees_ids)->get();
             @endphp
             <table class="table">
                 <thead>

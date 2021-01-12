@@ -23,6 +23,10 @@
         height: 550px;
         align-items: center;
     }
+
+    .nav :hover{
+        color:white!important;
+    }
 </style>
 
 <div class="card">
@@ -43,7 +47,7 @@
                     <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                         aria-controls="nav-profile" aria-selected="false" style=" color: purple;font-size:16px!important;"><b>Profile<b></a>
                     <a class="nav-item nav-link" id="more-info-tab" data-toggle="tab" href="#more-info" role="tab"
-                        aria-controls="more-info" aria-selected="false" style=" color: purple; font-size:16px!important;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More Info</a>
+                        aria-controls="more-info" aria-selected="false" style=" color: purple; font-size:16px!important; float: left!important;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; More Info</a>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">

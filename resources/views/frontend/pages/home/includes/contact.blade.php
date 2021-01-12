@@ -14,9 +14,9 @@
     <div class="container mt-5">
       <div class="row justify-content-center">
 
-        <div class="col-lg-3 col-md-4">
+        <div class="col-lg-3 col-md-4"><br>
 
-          <div class="info">
+          <div class="info" style="margin-left:-100px!important;">
             <div>
               <i class="fa fa-map-marker" style=" color:#7705a4;"></i>
                 <p>Jalan Gombak, 53100 <br> Selangor, Malaysia</p>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="social-links">
+          <div class="social-links" style="margin-left:-100px!important;">
             <a href="#" class="twitter" style=" background-color:#7705a4!important;" ><i class="fa fa-twitter"></i></a>
             <a href="#" class="facebook" style=" background-color:#7705a4!important;"><i class="fa fa-facebook"></i></a>
             <a href="#" class="instagram" style=" background-color:#7705a4!important;"><i class="fa fa-instagram"></i></a>
@@ -79,13 +79,13 @@
               <input type="radio" class="form-radio" id="input_3_2" name="q3_feedbackType" value="Questions" />
               <label id="label_input_3_2" for="input_3_2" style="margin-right:40px!important;font-size:14px;"> Questions </label>
             </span>
-          </div><br>
+          </div>
 
 
-              <div class="form-group">
+           {{--    <div class="form-group">
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                 <div class="validate"></div>
-              </div>
+              </div> --}}
               <div class="form-group">
                 <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                 <div class="validate"></div>

@@ -4,12 +4,13 @@ body{
 }
 .card .btn{
     background-color: #E6E6FA!important;
-    color: black;
+    color: black!important;
     border: none;
 }
-a :hover{
-border-color: white!important;
 
+a, .card :hover{
+border-color: white!important;
+color:white!important;
 }
 </style>
 
@@ -18,7 +19,7 @@ border-color: white!important;
 @can('permission_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" style="color:white; font-size:16px!important; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;" href="{{ route("admin.permissions.create") }}">
+            <a class="btn btn-success" style="color:white!important; font-size:16px!important; background-image: linear-gradient(to right top, #260326, #3b0441, #51025f, #650180, #7705a4)!important;" href="{{ route("admin.permissions.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.permission.title_singular') }}
             </a>
         </div>
