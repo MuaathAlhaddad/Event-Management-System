@@ -215,6 +215,14 @@
                                     </tr>
                                     <tr>
                                         <th>
+                                            Remaining Points
+                                        </th>
+                                        <td>
+                                            {{ $remaining_points ??  'Not Found' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
                                             Role
                                         </th>
                                         <td>
@@ -324,7 +332,7 @@
 
                         {{-- History  --}}
                         <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-                            
+                            <div id="events_month_graph" {{-- style="border: 1px solid #ccc" --}}></div>
                         </div>
                         @endcan
                     </div>
@@ -333,9 +341,9 @@
         </div>
     </div>
   </section><!-- End Portfolio Section -->
-
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script>
+  <script type="text/javascript">
      $(document).ready(function () {
 
          var readURL = function (input) {
@@ -387,5 +395,39 @@
              $(".file-upload").click();
          });
      });
+   
+        // No of events of each month
+        var EventsMonth = {!! json_encode($EventsMonth) !!};
+        var eventsMonth = EventsMonth.map(event => [event.month, event.no_events]); 
+         // Load Charts and the corechart and barchart packages.
+         google.charts.load('current', {'packages':['corechart']});
+
+        // Draw the pie chart and bar chart when Charts is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+             /********************************
+            *   No of events for each month
+            ******************************/ 
+            // prepare the graph
+            var events_month = new google.visualization.DataTable();
+                events_month.addColumn('string', 'Event');
+                events_month.addColumn('number', 'No Events');
+                events_month.addRows(eventsMonth);
+
+            // set graph options 
+                var events_month_options = {
+                    title: 'No of events registered in each Month',
+                    width: 400,
+                    height: 300,
+                    legend: 'none',
+                    backgroundColor: '#E4E4E4',
+                    vAxis: {minValue: 0}
+                };
+                // create the graph
+                var barchart = new google.visualization.ColumnChart(document.getElementById('events_month_graph'));
+                barchart.draw(events_month, events_month_options);
+        }
   </script>
 @endsection

@@ -65,7 +65,7 @@
     var staffEvents = {!! json_encode($staffEvents) !!};
     var StaffEvents = staffEvents.map(staff => [staff.staff_name, staff.no_events]); 
     
-    // No of events of each staff 
+    // No of events of each month
     var EventsMonth = {!! json_encode($EventsMonth) !!};
     var eventsMonth = EventsMonth.map(event => [event.month, event.no_events]); 
    
@@ -75,7 +75,7 @@
       // Draw the pie chart and bar chart when Charts is loaded.
       google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
 
         /********************************
         *   No of Events created by each staff
@@ -145,7 +145,7 @@
             // create the graph
             var barchart = new google.visualization.ColumnChart(document.getElementById('events_month_graph'));
             barchart.draw(events_month, events_month_options);
-      }
+    }
 
 
 
