@@ -28,14 +28,8 @@ Route::group(['as' =>'frontend.', 'namespace' => 'frontend'], function () {
 // ================================== //
         /** Ajax Request */       
 // ================================= //
-Route::post('setMaxPoints',function (Request $request) {
-    $max_points = DB::table('admin_rules')->whereNotNull('max_star_points')->update(['max_star_points' => $request->max_points]);
-    if($max_points == 0) {
-      $max_points = DB::table('admin_rules')->insert(['max_star_points' => $request->max_points]);
-    }
-    return response()->json(['msg' => 'Max Points Set successfully', 'max_points' =>  DB::table('admin_rules')->whereNotNull('max_star_points')->pluck('max_star_points')->first()]);
-})->name('setMaxPoints');
-
+Route::post('setUserProfile', 'AjaxController@setUserProfile')->name('setUserProfile'); 
+Route::post('setMaxPoints', 'AjaxController@setMaxPoints')->name('setMaxPoints');
 // ================================== //
         /** Admin Dashboard */       
 // ================================= //

@@ -2,26 +2,88 @@
 @section('content')
 <style>
     th {
-        color: {{config('styles.colors.primary')}};
+        color: {
+                {
+                config('styles.colors.primary')
+            }
+        }
+
+        ;
     }
+
     table.table th {
         width: auto;
-}
-    #user-profile {
-        color: {{config('styles.colors.primary')}};
     }
-    #user-profile-container{
+
+    #user-profile {
+        color: {
+                {
+                config('styles.colors.primary')
+            }
+        }
+
+        ;
+    }
+
+    #user-profile-container {
         padding: 10px;
         bottom: 450px;
         text-align: center;
         border-radius: 10px;
         background: white;
     }
-    .card{
+
+    .card {
         margin-top: 100px;
-        padding-top: 100px;
         height: 550px;
         align-items: center;
+    }
+
+    .profile-pic {
+        max-width: 200px;
+        max-height: 200px;
+        display: block;
+    }
+
+    .file-upload {
+        display: none;
+    }
+
+    .circle {
+        border-radius: 1000px !important;
+        overflow: hidden;
+        width: 128px;
+        height: 128px;
+        border: 1px solid rgba(0,0,0,.125);
+        background-color: white;
+        position: absolute;
+        top: -50px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .p-image {
+        position: absolute;
+        top: 65px;
+        right: 435;
+        color: #666666;
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .p-image:hover {
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .upload-button {
+        font-size: 1.2em;
+    }
+
+    .upload-button:hover {
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+        color: #999;
     }
 </style>
 
@@ -33,14 +95,24 @@
             {{ session()->get('success') }}
         </div>
         @endif
-        <div class="card">
-            <div class="position-absolute" id="user-profile-container">
-                <i class="fas fa-user fa-10x" id="user-profile"></i>
-            </div>
-        
-            <div class="card-body" style="position: absolute;
-                        top: 80px;
-                        margin-top: 30px;
+        <di class="card">
+                    <!-- profile -->
+                          <div class="circle">
+                            <!-- User Profile Image -->
+                            @if(isset($user->profile) && !empty($user->profile))
+                                <img class="profile-pic" src="{{$user->profile ?? ''}}">
+                            @else
+                                <img class="profile-pic" src="">
+                                <!-- Default Image -->
+                                <i class="fa fa-user fa-5x" style="position: absolute;top: 20px;left: 35px;"></i>
+                            @endisset
+                          </div>
+                          <div class="p-image">
+                            <i class="fa fa-camera upload-button"></i>
+                             <input class="file-upload" type="file" accept="image/*"/>
+                          </div>
+            <div class="card-body" style="
+                        margin-top: 100px;
                         width: 700px;">
                     <div class="mb-2">
                     <nav>
@@ -162,8 +234,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        
+                        {{-- Events Created --}}
                         @can('event_create')
-                            {{-- Events Created --}}
                             <div class="tab-pane fade" id="events-created" role="tabpanel" aria-labelledby="events-created-tab">
                                 @if($events->count() > 0)
                                 <ul class="list-group">
@@ -249,9 +322,9 @@
                                 @endif
                             </div>
 
-                            {{-- History  --}}
+                        {{-- History  --}}
                         <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
-
+                            
                         </div>
                         @endcan
                     </div>
@@ -261,4 +334,58 @@
     </div>
   </section><!-- End Portfolio Section -->
 
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script>
+     $(document).ready(function () {
+
+         var readURL = function (input) {
+             if (input.files && input.files[0]) {
+                 var reader = new FileReader();
+
+                 reader.onload = function (e) {
+                     var avator = e.target.result;
+                     var user_id = <?php echo $user->id; ?>;
+                     
+                     //set img src
+                     $('.fa-user').remove();
+                     $('.profile-pic').attr('src', avator);
+
+                    //  send Ajax request to store the profile
+                    $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                            }
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "{{route('setUserProfile')}}",
+                        data: {
+                            profile: avator,
+                            user_id: user_id,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            console.log(data);
+                            alert(data.msg);
+                        },
+                        error: function (data) {
+                            console.log(data);
+                        }
+                    })
+                 }
+
+                 reader.readAsDataURL(input.files[0]);
+             }
+         }
+
+
+         $(".file-upload").on('change', function () {
+             readURL(this);
+         });
+
+         $(".upload-button").on('click', function () {
+             $(".file-upload").click();
+         });
+     });
+  </script>
 @endsection
