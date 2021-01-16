@@ -127,9 +127,9 @@
                                 <a class="nav-item nav-link" style=" color:purple!important;"  id="events-registered-tab" data-toggle="tab" href="#events-registered"
                                     role="tab" aria-controls="events-registered" aria-selected="false">Events Registered</a>
                                 
+                                @endcan
                                 <a class="nav-item nav-link" style=" color:purple!important;"  id="events-history-tab" data-toggle="tab" href="#history"
                                 role="tab" aria-controls="events-history" aria-selected="false">History</a>
-                                @endcan
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -329,12 +329,11 @@
                                     <h6 class="p-4">No Events Registered Yet <i class="fas fa-smile-o"></i> </h6>
                                 @endif
                             </div>
-
+                        @endcan
                         {{-- History  --}}
                         <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                             <div id="events_month_graph" {{-- style="border: 1px solid #ccc" --}}></div>
                         </div>
-                        @endcan
                     </div>
                 </div>
             </div>
@@ -418,7 +417,7 @@
 
             // set graph options 
                 var events_month_options = {
-                    title: 'No of events registered in each Month',
+                    title: 'No of events in each Month',
                     width: 400,
                     height: 300,
                     legend: 'none',

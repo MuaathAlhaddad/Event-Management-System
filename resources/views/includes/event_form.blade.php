@@ -185,15 +185,15 @@
             transition: all .2s ease;
         }
         div{
-            color:purple;
+            color:white;
         }
     </style>
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 
     <!-- name & category-->
-    <div class="form-row col-sm-12" style="font-size:16px">
+    <div class="form-row col-sm-12" style="font-size:16px;">
         <!-- name -->
-        <div class="form-group col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6 {{ $errors->has('name') ? 'has-error' : '' }};" style="color:purple;">
             <label for="name">{{ trans('cruds.event.fields.name') }}*</label>
             <input type="text" id="name" name="name" class="form-control {{ $errors->has('name') ? 'border-danger' : '' }}" value="{{ old('name', isset($event) ? $event->name : '') }}" required>
             @if($errors->has('name'))
@@ -206,7 +206,7 @@
             </p>
         </div>
         <!-- category -->
-        <div class="form-group col-sm-6 {{ $errors->has('category') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6 {{ $errors->has('category') ? 'has-error' : '' }}" style="color:purple;">
             <label for="category">{{ trans('cruds.event.fields.category') }}*</label>
             <select id="category" name="category" class="form-control {{ $errors->has('category') ? 'border-danger' : '' }}">
                 <option selected value="">Choose...</option>
@@ -229,9 +229,9 @@
     </div>
 
     <!-- start_time & end_time -->
-    <div class="form-row col-sm-12" style="font-size:16px">
+    <div class="form-row col-sm-12" style="font-size:16px" >
         <!-- start_time -->
-        <div class="form-group col-sm-4 {{ $errors->has('start_time') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-4 {{ $errors->has('start_time') ? 'has-error' : '' }}" style="color:purple;>
             <label for="start_time">{{ trans('cruds.event.fields.start_time') }}*</label>
             <input type="text" id="start_time" name="start_time" class="form-control datetime {{ $errors->has('start_time') ? 'border-danger' : '' }}" value="{{ old('start_time', isset($event) ? $event->start_time : '') }}" required>
             @if($errors->has('start_time'))
@@ -245,7 +245,7 @@
         </div>
 
         <!-- end_time -->
-        <div class="form-group col-sm-4 {{ $errors->has('end_time') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-4 {{ $errors->has('end_time') ? 'has-error' : '' }}" style="color:purple;>
             <label for="end_time">{{ trans('cruds.event.fields.end_time') }}*</label>
             <input type="text" id="end_time" name="end_time" class="form-control datetime {{ $errors->has('end_time') ? 'border-danger' : '' }}" value="{{ old('end_time', isset($event) ? $event->end_time : '') }}" required>
             @if($errors->has('end_time'))
@@ -259,7 +259,7 @@
         </div>
 
         <!-- Semester -->
-        <div class="form-group col-sm-4 {{ $errors->has('semester') ? 'has-error' : '' }}" style="font-size:16px">
+        <div class="form-group col-sm-4 {{ $errors->has('semester') ? 'has-error' : '' }}" style="font-size:16px;color:purple;">
             <label for="semester">Semester:*</label>
             <select id="semester" name="semester" class="form-control {{ $errors->has('semester') ? 'border-danger' : '' }}">
                 <option selected value="">Choose...</option>
@@ -281,7 +281,7 @@
     <!-- location & desc -->
     <div class="form-row col-sm-12" style="font-size:16px">
         <!-- location -->
-        <div class="form-group col-sm-6 {{ $errors->has('location') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6 {{ $errors->has('location') ? 'has-error' : '' }}" style="color:purple;>
             <label for="location">{{ trans('cruds.event.fields.location') }}*</label>
             <textarea id="location" name="location" class="form-control {{ $errors->has('location') ? 'border-danger' : '' }}" required rows="3">{{ old('location', isset($event) ? $event->location : '') }}</textarea>
             @if($errors->has('location'))
@@ -294,7 +294,7 @@
             </p>
         </div>
         <!-- desc -->
-        <div class="form-group col-sm-6{{ $errors->has('desc') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6{{ $errors->has('desc') ? 'has-error' : '' }}" style="color:purple;>
             <label for="desc">{{ trans('cruds.event.fields.desc') }}*</label>
             <textarea id="desc" name="desc" class="form-control {{ $errors->has('desc') ? 'border-danger' : '' }}"  required rows="3">{{ old('desc', isset($event) ? $event->desc : '') }}</textarea>
             @if($errors->has('desc'))
@@ -311,7 +311,7 @@
     <!-- points & max_no_attendees -->
     <div class="form-row col-sm-12" style="font-size:16px">
         <!-- points -->
-        <div class="form-group col-sm-6 {{ $errors->has('points') ? 'has-error' : '' }}">
+        <div class="form-group col-sm-6 {{ $errors->has('points') ? 'has-error' : '' }}" style="color:purple;">
             <label for="points">{{ trans('cruds.event.fields.points') }}*</label>
             <input type="number" id="points" name="points" class="form-control {{ $errors->has('points') ? 'border-danger' : '' }}" value="{{ old('points', isset($event) ? $event->points : '') }}" required>
             @if($errors->has('points'))
@@ -324,7 +324,7 @@
             </p>
         </div>
         <!-- max_no_attendees -->
-        <div class="form-group col-sm-6 {{ $errors->has('max_no_attendees') ? 'has-error' : '' }}" style="font-size:16px">
+        <div class="form-group col-sm-6 {{ $errors->has('max_no_attendees') ? 'has-error' : '' }}" style="font-size:16px;color:purple;">
             <label for="max_no_attendees">{{ trans('cruds.event.fields.max_no_attendees') }}*</label>
             <input type="number" id="max_no_attendees" name="max_no_attendees" class="form-control {{ $errors->has('max_no_attendees') ? 'border-danger' : '' }}" value="{{ old('max_no_attendees', isset($event) ? $event->max_no_attendees : '') }}" required>
             @if($errors->has('max_no_attendees'))
@@ -340,7 +340,7 @@
 
     @can('user_create')    
     <!-- Add  Attendees -->
-    <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}" style="font-size:16px">
+    <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}" style="font-size:16px;color:purple;">
         <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}</label>        
         <select name="attendees_ids[]" id="attendees_ids" data-live-search="true" data-max-options="5" class="form-control selectpicker" multiple="multiple">
             @foreach(App\User::all() as $key => $user)
@@ -357,7 +357,7 @@
     </div>   
     @endcan 
      <!-- recurrence -->
-    <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}" style="font-size:16px">
+    <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}" style="font-size:16px;color:purple;">
         <label>{{ trans('cruds.event.fields.recurrence') }}*</label>
         @foreach(App\Event::RECURRENCE_RADIO as $key => $label)
         <div class="recurrence-btn">                                        

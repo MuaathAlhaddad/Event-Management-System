@@ -16,17 +16,24 @@ class UsersController extends Controller
     public function show($id) {
         if(Gate::allows('event_create')) {
             $events = Event::where('moderator_id', $id)->get();
+            //get no of events for each staff 
+            $EventsMonth = Event::selectRaw("DATE_FORMAT(start_time, '%b %Y') as month, COUNT(*) no_events")
+            ->where('moderator_id', '=', $id)
+            ->groupBy('month')
+            ->get()->toArray();
+
         } else {
             $events = Event::whereJsonContains('attendees_ids', $id)->get();   
+            //get no of events for each month 
+            $EventsMonth = Event::selectRaw("DATE_FORMAT(start_time, '%b %Y') as month, COUNT(*) no_events")
+            ->whereJsonContains('attendees_ids', $id)
+            ->groupBy('month')
+            ->get()->toArray();
         }
 
         $user = User::find($id);
 
-        //get no of events for each month 
-        $EventsMonth = Event::selectRaw("DATE_FORMAT(start_time, '%b %Y') as month, COUNT(*) no_events")
-                        ->whereJsonContains('attendees_ids', $id)
-                        ->groupBy('month')
-                        ->get()->toArray();
+        
 
         // Calculate remaining points   
         $max_points =  DB::table('admin_rules')->whereNotNull('max_star_points')->pluck('max_star_points')->first();
