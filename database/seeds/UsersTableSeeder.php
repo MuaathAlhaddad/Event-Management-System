@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
                     'first_name'           => 'admin',
                     'last_name'           => 'admin',
                     'phone_number'           => '01112223334',
-                    'email'          => 'admin@admin.com',
+                    'email'          => 'admin@com',
                     'gender'          => 'm',
                     'password'       => Hash::make('admin'),
                     'remember_token' => null,

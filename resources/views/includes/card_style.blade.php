@@ -1,6 +1,6 @@
 <style>
     .card-header {
-        background: {{config('styles.admin.colors.primary')}}; 
+        background: {{config('styles.colors.primary')}}; 
         color: #fff; 
         font-weight: bold; 
         font-family: system-ui;

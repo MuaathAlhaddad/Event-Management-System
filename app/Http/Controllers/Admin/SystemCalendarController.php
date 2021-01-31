@@ -15,7 +15,7 @@ class SystemCalendarController extends Controller
             'field'      => 'name',
             'prefix'     => '',
             'suffix'     => '',
-            'route'      => 'admin.events.edit',
+            'route'      => 'events.edit',
         ],
     ];
 
@@ -39,6 +39,6 @@ class SystemCalendarController extends Controller
                 ];
             }
         }
-        return view('admin.calendar.calendar', compact('events'));
+        return view('calendar.calendar', compact('events'));
     }
 }
