@@ -23,7 +23,6 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
-        'last_name',
         'updated_at',
         'created_at',
         'deleted_at',
@@ -39,6 +38,13 @@ class User extends Authenticatable
         'deleted_at',
         'remember_token',
         'email_verified_at',
+    ];
+
+    static $display =[
+        'id',
+        'name',
+        'email',
+        'created_at',
     ];
 
     public function getEmailVerifiedAtAttribute($value)

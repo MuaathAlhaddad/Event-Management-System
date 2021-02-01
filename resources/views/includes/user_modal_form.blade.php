@@ -1,5 +1,4 @@
- 
-  <!-- Modal for Create and Edit User-->
+ <!-- Modal for Create and Edit User-->
   <div class="modal fade text-left" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="user-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -12,7 +11,6 @@
         <div class="modal-body">
             <form method="post" action="{{ route('users.store') }}" id="user-form" autocomplete="off">
                 @csrf
-                <input type="hidden" name="id" id="input-id">
                 <div class="pl-lg-4">
                     {{-- Name --}}
                     <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
@@ -47,35 +45,21 @@
                             </span>
                         @endif
                     </div>
-
-    {{-- <!-- role -->
-    <div class="form-group col-sm-12 {{ $errors->has('roles') ? 'has-error' : '' }}">
-        <label for="roles">{{ trans('cruds.user.fields.roles') }}*
-            <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>
-            <span class="btn btn-info btn-xs deselect-all">{{ trans('global.deselect_all') }}</span></label>
-        <select name="roles[]" id="roles" class="form-control select2" multiple="multiple" required>
-            @foreach($roles as $id => $roles)
-                <option value="{{ $id }}" {{ (in_array($id, old('roles', [])) || isset($user) && $user->roles->contains($id)) ? 'selected' : '' }}>{{ $roles }}</option>
-            @endforeach
-        </select>
-         --}}
-
-
-
                     {{-- User Role --}}
                     <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                         <label for="user-role" class="form-control-label">{{__('User Role')}}*</label>
-                        <select  class="form-control form-control-alternative select2" name="roles[]" id="input-user-role" multiple="multiple" required>
+                        <select class="form-control form-control-alternative select2" name="roles[]" id="input-user-role"
+                            multiple required>
                             @forelse ($roles as $id => $role)
-                              <option value="{{ $id }}">{{ $role }}</option>
+                            <option value="{{ $id }}">{{ $role }}</option>
                             @empty
-                              <option value="">No Roles</option>
+                            <option value="">No Roles</option>
                             @endforelse
                         </select>
                         @if($errors->has('roles'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('roles') }}
-                            </em>
+                        <em class="invalid-feedback">
+                            {{ $errors->first('roles') }}
+                        </em>
                         @endif
                     </div>
                 </div>
@@ -102,7 +86,18 @@
     @endif
     <script>
         $('#user-modal').on('hidden.bs.modal', function() {
-                location.reload();
+                $(this).find("input, select").val("").end();
         })
+        $(document).ready(function () {
+
+            var multipleCancelButton = new Choices('#input-user-role', {
+                removeItemButton: true,
+                maxItemCount: 5,
+                searchResultLimit: 5,
+                renderChoiceLimit: 5
+            });
+
+
+        });
     </script>
 @endpush

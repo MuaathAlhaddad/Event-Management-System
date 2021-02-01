@@ -17,7 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $users = User::paginate(10);
+        $users = User::select(User::$display)->paginate(5);
         $roles = Role::all()->pluck('title', 'id');
 
         return view('users.index', ['users' => $users, 'roles' => $roles]);

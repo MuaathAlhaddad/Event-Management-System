@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-@card_style()
 <div class="card">
     <div class="card-header">
         {{ trans('global.edit') }} {{ trans('cruds.user.title_singular') }}
@@ -12,8 +11,6 @@
             @method('PUT')
             @user_form()
         </form>
-
-
     </div>
 </div>
 @endsection

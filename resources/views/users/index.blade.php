@@ -5,7 +5,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-
+                
+                {{-- alert Display --}}
                 @if (session('status'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('status') }}
@@ -16,7 +17,7 @@
                 @endif
 
                 <div class="card shadow">
-                    {{-- Header --}}
+                    {{-- Grid Header --}}
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
@@ -25,7 +26,7 @@
                         @can('user_create')
                             <div class="col-4 text-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#user-modal"  id="create-btn">Add user</a>
-                                @user_form()
+                                @user_modal_form()
                             </div>
                         @endcan
                         </div>
@@ -34,14 +35,11 @@
                     <div class="col-12">
                     </div>
 
-                    {{-- Table --}}
+                    {{-- Grid --}}
                     <div class="table-responsive">
                         <table class="table table-bordered text-center table-striped table-hover datatable datatable-User">
                             <thead>
                                 <tr>
-                                    <th width="10">
-            
-                                    </th>
                                     <th>
                                         {{ trans('cruds.user.fields.id') }}
                                     </th>
@@ -55,6 +53,9 @@
                                         {{ trans('cruds.user.fields.roles') }}
                                     </th>
                                     <th>
+                                        Created at
+                                    </th>
+                                    <th>
                                         Actions
                                     </th>
                                 </tr>
@@ -62,9 +63,6 @@
                             <tbody>
                                 @foreach($users as $key => $user)
                                     <tr data-entry-id="{{ $user->id }}">
-                                        <td>
-            
-                                        </td>
                                         <td>
                                             {{ $user->id ?? '' }}
                                         </td>
@@ -74,6 +72,9 @@
                                         <td class="text-lowercase">
                                             {{ $user->email ?? '' }}
                                         </td>
+                                        <td class="text-lowercase">
+                                            {{ $user->created_at->format('Y-m-d') }}
+                                        </td>
                                         <td >
                                             @foreach($user->roles as $key => $item)
                                                 <span class="badge badge-info">{{ $item->title }}</span>
@@ -81,7 +82,7 @@
                                         </td>
                                         <td class="text-capitalize">
                                             @can('user_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('profile.edit', $user->id) }}">
+                                                <a class="btn btn-xs btn-primary" href="{{ route('users.show', $user->id) }}">
                                                     {{ trans('global.view') }}
                                                 </a>
                                             @endcan
@@ -102,11 +103,9 @@
                         </table>
                     </div>
                     
-                    {{-- Footer --}}
+                    {{-- Pagination --}}
                     <div class="card-footer py-4">
-                        <nav class="d-flex justify-content-end" aria-label="...">
-
-                        </nav>
+                        {{ $users->links() }}
                     </div>
                 </div>
             </div>
@@ -114,5 +113,3 @@
     </div>
 </div>
 @endsection
-
-@datatablescript(['para' => ['delete' => 'user_delete', 'route' => "users/destroy", 'class' => '.datatable-User:not(.ajaxTable)']])

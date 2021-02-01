@@ -104,6 +104,10 @@ class PermissionsTableSeeder extends Seeder
                 'id'    => '24',
                 'title' => 'event_access_deletedEvents',
             ],
+            [
+                'id'    => '24',
+                'title' => 'profile_edit',
+            ],
         ];
 
         Permission::insert($permissions);

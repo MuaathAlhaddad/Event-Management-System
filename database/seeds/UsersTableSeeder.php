@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'admin@admin.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ], 
                 [
                     'id'             => 2,
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'ali@staff.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 3,
@@ -30,6 +32,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'muaath@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 4,
@@ -37,6 +40,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'read@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 5,
@@ -44,6 +48,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'asma@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 6,
@@ -51,6 +56,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'amal@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 7,
@@ -58,6 +64,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'asia@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 8,
@@ -65,6 +72,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'mustfa@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 9,
@@ -72,6 +80,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'naif@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
                 [
                     'id'             => 10,
@@ -79,6 +88,7 @@ class UsersTableSeeder extends Seeder
                     'email'          => 'muna@student.com',
                     'password'       => Hash::make('password'),
                     'remember_token' => null,
+                    'created_at'    => date('Y-m-d h:m:s'),
                 ],
             ],
         ];
