@@ -23,6 +23,7 @@ class User extends Authenticatable
     ];
 
     protected $dates = [
+        'last_name',
         'updated_at',
         'created_at',
         'deleted_at',
@@ -30,13 +31,8 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
-        'phone_number',
-        'gender',
-        'kulliyyah',
-        'points_earned',
         'password',
         'created_at',
         'updated_at',
