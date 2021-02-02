@@ -20,8 +20,8 @@
         border-radius: 10px;
         background: white;
     }
-    .card{
-        margin-top: 100px;
+    .card-body{
+        margin-top: 7rem;
     }
 </style>    
 @endpush
@@ -40,11 +40,33 @@
                 </div>
                 @endif
 
-                <div class="card shadow">
-                    <div class="position-relative" id="user-profile-container">
-                        <i class="fas fa-user fa-10x" id="user-profile"></i>
+                  {{-- alert Display --}}
+                  @if ($errors->any())
+                      
+                  @endif
+                  @isset ($error->profile)
+                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      {{ $errors->profile }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  @endisset
+                <form action="{{route('users.profile.update')}}" method="post" id="profile-form" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" id="imgupload" name="profile" style="display:none"/> 
+                </form>
+
+                <div class="card shadow mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a href="#" id="img-link">
+                                    <img src="{{ $user->profile ? asset("storage/profiles/$user->profile") :  asset('argon/img/theme/team-4-800x800.jpg') }}" class="rounded-circle" width="150" height="150" id="previewImg">
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                
                     <div class="card-body">
                         <div class="mb-2">
                              {{-- Nav Tabs  --}}
@@ -188,4 +210,45 @@
         </div>
     </div>
 </div>
+@push('js')
+    <script>
+        $('#img-link').on('click', function(e) {
+            e.preventDefault();
+            $('#imgupload').click();    
+        });
+        $('#imgupload').on('change', function(){  
+            var file = $("input[type=file]").get(0).files[0];
+    
+            if(file){
+                var reader = new FileReader();
+    
+                reader.onload = function(){
+                    $("#previewImg").attr("src", reader.result);
+                }
+                reader.readAsDataURL(file);
+
+                $('#profile-form').submit();
+                // make ajax request to send the file to the contrller
+                // $.ajaxSetup({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     }
+                // });
+                // var formData = new FormData($("input[type='file']"));
+
+                // $.ajax({
+                //     type: 'POST', 
+                //     url: '{{ route("users.profile.update") }}',
+                //     data: {
+                //         profile: 
+                //     }, 
+                //     dataType: 'formData', 
+                //     success: function(re) {
+                //         console.log(re);
+                //     }
+                // });
+            }
+        });
+    </script>
+@endpush
 @endsection

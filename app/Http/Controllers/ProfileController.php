@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Role;
+use App\User;
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -15,7 +18,13 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('profile.edit');
+        abort_if(Gate::denies('profile_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $roles = Role::all()->pluck('title', 'id');
+        
+        $user->load('roles');
+
+        return view('profile.edit', compact('roles', 'user'));
     }
 
     /**

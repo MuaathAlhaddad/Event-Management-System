@@ -105,8 +105,12 @@ class PermissionsTableSeeder extends Seeder
                 'title' => 'event_access_deletedEvents',
             ],
             [
-                'id'    => '24',
+                'id'    => '25',
                 'title' => 'profile_edit',
+            ],
+            [
+                'id'    => '27',
+                'title' => 'user_profile_update',
             ],
         ];
 

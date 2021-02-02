@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group(function () {
     // Users
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
     Route::resource('users', 'UsersController');
+	Route::post('users/profile', ['as' => 'users.profile.update', 'uses' => 'UsersController@update_profile']);
+    // These are for the auth user
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
@@ -38,3 +40,9 @@ Route::middleware(['auth'])->group(function () {
     // Calendar
     Route::get('system-calendar', 'SystemCalendarController@index')->name('systemCalendar');
 });
+
+
+
+/***************
+ * Ajax Routes
+ **************/

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\MassDestroyUserRequest;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use Gate;
 use App\Role;
 use App\User;
-use Gate;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\MassDestroyUserRequest;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\UpdateUserProfileRequest;
 
 class UsersController extends Controller
 {
@@ -80,5 +82,13 @@ class UsersController extends Controller
         User::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function update_profile(UpdateUserProfileRequest $request) {
+        if ($request->hasFile('profile')) {
+            $path = Storage::putFile('public/profiles', $request->file('profile'));
+            User::find($request->user()->id)->update(['profile' => basename($path)]);
+        }
+        return back()->with('status', 'Profile Updated Successfully');
     }
 }
