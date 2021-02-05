@@ -1,6 +1,6 @@
 <?php
 
-use App\Role;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class RolesTableSeeder extends Seeder
@@ -14,7 +14,7 @@ class RolesTableSeeder extends Seeder
             ],
             [
                 'id'    => 2,
-                'title' => 'Student',
+                'title' => 'School',
             ],
             [
                 'id'    => 3,

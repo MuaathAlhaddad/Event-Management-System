@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyRoleRequest;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Permission;
-use App\Role;
+use App\Models\Permission;
+use App\Models\Role;
 use Gate;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RolesController extends Controller

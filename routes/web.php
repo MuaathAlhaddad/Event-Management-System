@@ -46,3 +46,4 @@ Route::middleware(['auth'])->group(function () {
 /***************
  * Ajax Routes
  **************/
+Route::post('country/states', 'AjaxController@getStates')->name('country.states');

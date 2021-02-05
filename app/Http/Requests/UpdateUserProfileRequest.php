@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Event;
+use App\Models\Event;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class UpdateUserProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'profile'       => ['required', 'mimes:jpeg,jpg,png,gif', 'max:10000']
+            'avatar'       => ['required', 'mimes:jpeg,jpg,png,gif', 'max:10000'],
         ];
     }
 }

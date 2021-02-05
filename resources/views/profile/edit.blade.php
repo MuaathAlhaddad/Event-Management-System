@@ -1,6 +1,46 @@
 @extends('layouts.app', ['title' => __('User Profile')])
-
 @section('content')
+@push('css')
+    <style>
+        #profile-description {
+            /* max-width: 400px; */
+            margin-top: 20px;
+            position: relative;
+        }
+
+        #profile-description .text {
+            /*   width: 660px;  */
+            margin-bottom: 5px;
+            color: #777;
+            padding: 0 15px;
+            position: relative;
+            font-family: Arial;
+            font-size: 14px;
+            display: block;
+        }
+
+        #profile-description .show-more {
+            /*   width: 690px;  */
+            color: #777;
+            position: relative;
+            font-size: 12px;
+            padding-top: 5px;
+            height: 30px;
+            text-align: center;
+            background: #f1f1f1;
+            cursor: pointer;
+        }
+
+        #profile-description .show-more:hover {
+            color: #1779dd;
+        }
+
+        #profile-description .show-more-height {
+            height: 65px;
+            overflow: hidden;
+        }
+    </style>
+@endpush
     @include('profile.partials.header', [
         'title' => __('Hello') . ' '. auth()->user()->name,
         'description' => __('This is your profile page. You can see the progress you\'ve made with your work and manage your projects or assigned tasks'),
@@ -15,12 +55,16 @@
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image">
                                 <a href="#">
-                                    <img src="{{ asset('argon') }}/img/theme/team-4-800x800.jpg" class="rounded-circle">
+                                    @php
+                                        $avatar= auth()->user()->avatar;
+                                    @endphp
+                                    <img src="{{  $avatar? asset("storage/avatars/$avatar") : asset('storage/avatars/male_avatar.png') }}" class="rounded-circle"
+                                    width="150" height="150">
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                    <div class="card-header text-center border pt-6  pb-0 pb-md-2 p-1">
                         <div class="d-flex justify-content-between">
                             <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Connect') }}</a>
                             <a href="#" class="btn btn-sm btn-default float-right">{{ __('Message') }}</a>
@@ -47,20 +91,29 @@
                         </div>
                         <div class="text-center">
                             <h3>
-                                {{ auth()->user()->name }}<span class="font-weight-light">, 27</span>
+                                {{ auth()->user()->name }}<span class="font-weight-light">, {{ date_diff(date_create(auth()->user()->dob), date_create('now'))->y }}                                </span>
                             </h3>
                             <div class="h5 font-weight-300">
-                                <i class="ni location_pin mr-2"></i>{{ __('Bucharest, Romania') }}
+                                <i class="ni location_pin mr-2"></i>{{ auth()->user()->country}} , {{auth()->user()->state}}
                             </div>
                             <div class="h5 mt-4">
-                                <i class="ni business_briefcase-24 mr-2"></i>{{ __('Solution Manager - Creative Tim Officer') }}
+                                <i class="ni business_briefcase-24 mr-2"></i> 
+                                @foreach (auth()->user()->roles as $role)
+                                    {{ ucfirst($role->title) }}
+                                @endforeach
+                                - {{ config('app.name') }} 
                             </div>
                             <div>
                                 <i class="ni education_hat mr-2"></i>{{ __('University of Computer Science') }}
                             </div>
                             <hr class="my-4" />
-                            <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
-                            <a href="#">{{ __('Show more') }}</a>
+                            <div id="profile-description">
+                                <div class="text show-more-height">
+                                    {{auth()->user()->bio}}
+                                </div>
+                                <div class="show-more">Show More</div>
+                            </div>
+                            <!-- [End] #profile-description -->
                         </div>
                     </div>
                 </div>
@@ -166,7 +219,19 @@
                 </div>
             </div>
         </div>
-        
+        @push('js')
+         <script>
+                 $(".show-more").click(function () {
+        if($(".text").hasClass("show-more-height")) {
+            $(this).text("Show Less");
+        } else {
+            $(this).text("Show More");
+        }
+
+        $(".text").toggleClass("show-more-height");
+    });
+        </script>   
+        @endpush
         @include('layouts.footers.nav')
     </div>
 @endsection

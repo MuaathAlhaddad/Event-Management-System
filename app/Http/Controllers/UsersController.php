@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Gate;
-use App\Role;
-use App\User;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
@@ -19,17 +20,10 @@ class UsersController extends Controller
     public function index()
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $users = User::select(User::$display)->paginate(5);
+        $users = User::select(User::INDEX_DISPLAY)->paginate(5);
         $roles = Role::all()->pluck('title', 'id');
 
         return view('users.index', ['users' => $users, 'roles' => $roles]);
-    }
-
-    public function create()
-    {
-        abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('users.create');
     }
 
     public function store(StoreUserRequest $request)
@@ -56,16 +50,20 @@ class UsersController extends Controller
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
 
-        return redirect()->route('users.index');
+        return redirect()->back()->with('status', 'User updated Successfully');
     }
 
     public function show(User $user)
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $allRoles = Role::all()->pluck('title', 'id');
+
+        $countries = Country::all();
+
         $user->load('roles');
 
-        return view('users.show', compact('user'));
+        return view('users.show', compact('user', 'allRoles', 'countries'));
     }
 
     public function destroy(User $user)
@@ -85,9 +83,9 @@ class UsersController extends Controller
     }
 
     public function update_profile(UpdateUserProfileRequest $request) {
-        if ($request->hasFile('profile')) {
-            $path = Storage::putFile('public/profiles', $request->file('profile'));
-            User::find($request->user()->id)->update(['profile' => basename($path)]);
+        if ($request->hasFile('avatar')) {
+            $path = Storage::putFile('public/avatars', $request->file('avatar'));
+            User::findOrFail($request->user_id)->update(['avatar' => basename($path)]);
         }
         return back()->with('status', 'Profile Updated Successfully');
     }

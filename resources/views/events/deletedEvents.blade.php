@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@card_style()
+//@card_style()
 
     <div class="card">
         <div class="card-header">
@@ -30,7 +30,7 @@
                             <td>{{ $event->name ?? '' }}</td>
                             <td>{{ $event->start_time ?? '' }}</td>
                             <td>{{ $event->end_time ?? '' }}</td>
-                            <td class="text-center">{{ App\Event::RECURRENCE_RADIO[$event->recurrence] ?? '' }}</td>
+                            <td class="text-center">{{ App\Models\Event::RECURRENCE_RADIO[$event->recurrence] ?? '' }}</td>
                             <td>
                                 <div class="progress border" style="height: 25px;">
                                     <div class="progress-bar bg-success" role="progressbar"

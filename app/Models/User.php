@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Hash;
@@ -31,9 +31,15 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'bio',
         'email',
+        'phone',
+        'sex',
+        'country',
+        'state',
+        'avatar',
+        'dob',
         'password',
-        'profile',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -41,12 +47,27 @@ class User extends Authenticatable
         'email_verified_at',
     ];
 
-    static $display =[
+    const INDEX_DISPLAY = [
         'id',
         'name',
         'email',
         'created_at',
     ];
+
+    const PROFILE_DISPLAY = [
+        'name',
+        'bio',
+        'email',
+        'phone',
+        'sex',
+        'country',
+        'state',
+        'avatar',
+        'dob',
+        'password',
+        'created_at',
+    ];
+
 
     public function getEmailVerifiedAtAttribute($value)
     {
@@ -70,8 +91,15 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    /** 
+     * Relations
+    */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
+    public function school() {
+        return $this->hasOne(School::class, 'user_id', 'id');
+    }
+
 }

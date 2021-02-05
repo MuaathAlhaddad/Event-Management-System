@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Event;
+use App\Models\Event;
 use App\Observers\RecurrenceObserver;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -28,9 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::observe(RecurrenceObserver::class);
-        Blade::include('includes.user_modal_form', 'user_modal_form');
         Blade::include('includes.event_form', 'event_form'); 
-        Blade::include('includes.card_style', 'card_style');
         Blade::include('includes.datatablescript', 'datatablescript'); 
     }
 }

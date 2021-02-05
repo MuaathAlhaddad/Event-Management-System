@@ -11,7 +11,17 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             PermissionRoleTableSeeder::class,
             UsersTableSeeder::class,
-            RoleUserTableSeeder::class,
+            SchoolsTableSeeder::class,
+            PackagesTableSeeder::class,
+            CoursesTableSeeder::class,
+            ReviewsTableSeeder::class,
+            ServicesTableSeeder::class,
+            PhotosTableSeeder::class,
+            MaterialsTableSeeder::class,
+            CalendarsTableSeeder::class,
+            AccreditationsTableSeeder::class,
+            CountriesTableSeeder::class,
+            StatesTableSeeder::class,
         ]);
     }
 }

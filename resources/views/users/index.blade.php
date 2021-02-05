@@ -26,7 +26,7 @@
                         @can('user_create')
                             <div class="col-4 text-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#user-modal"  id="create-btn">Add user</a>
-                                @user_modal_form()
+                                @include('includes.user_modal_form')
                             </div>
                         @endcan
                         </div>

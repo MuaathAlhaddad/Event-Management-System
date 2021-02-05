@@ -9,7 +9,7 @@
         </div>
     </div>
 @endcan
-@card_style()
+//@card_style()
 <div class="card">
     <div class="card-header">
         <span class=" text-uppercase font-weight-bold" >
@@ -40,7 +40,7 @@
                             <td>{{ $event->name ?? '' }}</td>
                             <td>{{ $event->start_time ?? '' }}</td>
                             <td>{{ $event->end_time ?? '' }}</td>
-                            <td class="text-center">{{ App\Event::RECURRENCE_RADIO[$event->recurrence] ?? '' }}</td>
+                            <td class="text-center">{{ App\Models\Event::RECURRENCE_RADIO[$event->recurrence] ?? '' }}</td>
                             <td>
                                 <div class="progress border" style="height: 25px;">
                                     <div class="progress-bar bg-success" role="progressbar" style="width: {{"$event->percentage"}}; padding: 4px; text-transform: uppercase; font-weight: bold;"

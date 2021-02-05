@@ -96,8 +96,6 @@
                 searchResultLimit: 5,
                 renderChoiceLimit: 5
             });
-
-
         });
     </script>
 @endpush

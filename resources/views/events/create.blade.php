@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@card_style()
+//@card_style()
 <div class="card">
     <div class="card-header">
         {{ trans('global.create') }} {{ trans('cruds.event.title_singular') }}

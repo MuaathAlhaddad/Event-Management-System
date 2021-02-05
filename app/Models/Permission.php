@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models;
+
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,6 +25,9 @@ class Permission extends Model
         'deleted_at',
     ];
 
+    /** 
+     *  Relations
+    */
     public function roles()
     {
         return $this->belongsToMany(Role::class);

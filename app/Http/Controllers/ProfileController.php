@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
-use Illuminate\Auth\Access\Gate;
+use App\Models\Role;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
@@ -21,10 +21,7 @@ class ProfileController extends Controller
         abort_if(Gate::denies('profile_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::all()->pluck('title', 'id');
-        
-        $user->load('roles');
-
-        return view('profile.edit', compact('roles', 'user'));
+        return view('profile.edit', compact('roles'));
     }
 
     /**

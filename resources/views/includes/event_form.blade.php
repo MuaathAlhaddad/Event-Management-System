@@ -91,7 +91,7 @@
             <label for="category">{{ trans('cruds.event.fields.category') }}*</label>
             <select id="category" name="category" class="form-control">
                 <option selected value="">Choose...</option>
-                @foreach(App\Event::CATEGORIES as $key => $category)
+                @foreach(App\Models\Event::CATEGORIES as $key => $category)
                      
                 <option {{(old('category', isset($event) ? $event->category : '') === $category) ? 'selected' : ''}} value="{{$category}}">
                         {{ $category }}
@@ -204,7 +204,7 @@
     <div class="form-group {{ $errors->has('attendees_ids') ? 'has-error' : '' }}">
         <label for="attendees_ids">{{ trans('cruds.event.fields.attendees_ids') }}*</label>        
         <select name="attendees_ids[]" id="attendees_ids" data-live-search="true" data-max-options="5" class="form-control selectpicker" multiple="multiple">
-            @foreach(App\User::all() as $key => $user)
+            @foreach(App\Models\User::all() as $key => $user)
                 <option value="{{$user->id}}" {{ (in_array($user->id, (array) old('attendees_ids', isset($event) ? $event->attendees_ids : ''))) ? 'selected' : '' }}> 
                     {{ucwords( $user->first_name." ".$user->last_name) }} 
                 </option>
@@ -219,7 +219,7 @@
      <!-- recurrence -->
     <div class="form-group {{ $errors->has('recurrence') ? 'has-error' : '' }}">
         <label>{{ trans('cruds.event.fields.recurrence') }}*</label>
-        @foreach(App\Event::RECURRENCE_RADIO as $key => $label)
+        @foreach(App\Models\Event::RECURRENCE_RADIO as $key => $label)
         <div class="recurrence-btn">                                        
             <input type="radio" id="recurrence_{{ $key }}" name="recurrence" value="{{ $key }}" {{(old('recurrence', isset($event) ? $event->recurrence : '') === (string)$key) ? 'checked' : ''}} required/>
             <label class="recurrence-label" for="recurrence_{{ $key }}">{{ $label }}</label>
