@@ -19,17 +19,14 @@ class RolesController extends Controller
 
         $roles = Role::all();
 
-        return view('roles.index', compact('roles'));
+        $permission_resources = Permission::groupBy('resource')->pluck('resource');
+        foreach ($permission_resources as $resource) {
+            $resources_permissions[$resource] = Permission::resource($resource)->pluck('title', 'id');
+        }
+        
+        return view('roles.index', compact('roles', 'permission_resources', 'resources_permissions'));
     }
 
-    public function create()
-    {
-        abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $permissions = Permission::all()->pluck('title', 'id');
-
-        return view('roles.create', compact('permissions'));
-    }
 
     public function store(StoreRoleRequest $request)
     {
@@ -43,16 +40,21 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $permissions = Permission::all()->pluck('title', 'id');
+        $permission_resources = Permission::groupBy('resource')->pluck('resource');
+        
+        foreach ($permission_resources as $resource) {
+            $resources_permissions[$resource] = Permission::resource($resource)->pluck('title', 'id');
+        }
 
         $role->load('permissions');
 
-        return view('roles.edit', compact('permissions', 'role'));
+        return view('roles.edit', compact('permission_resources', 'resources_permissions', 'role'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role)
     {
         $role->update($request->all());
+        
         $role->permissions()->sync($request->input('permissions', []));
 
         return redirect()->route('roles.index');

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Seeder;
 
@@ -23,5 +24,12 @@ class RolesTableSeeder extends Seeder
         ];
 
         Role::insert($roles);
+
+        /**
+         * Give Role Permissions
+         */
+        Role::findOrFail(1)->permissions()->sync(Permission::pluck('id'));
+        Role::findOrFail(2)->permissions()->sync(Permission::resource('events')->pluck('id'));
+        Role::findOrFail(3)->permissions()->sync(Permission::resource('users')->pluck('id'));
     }
 }

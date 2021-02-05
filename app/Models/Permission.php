@@ -20,10 +20,24 @@ class Permission extends Model
 
     protected $fillable = [
         'title',
+        'resource',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * Scope a query to only include permissions of a given resource.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $resource
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeResource($query, $resource)
+    {
+        return $query->where('resource', $resource);
+    }
+
 
     /** 
      *  Relations
@@ -32,4 +46,6 @@ class Permission extends Model
     {
         return $this->belongsToMany(Role::class);
     }
+
+     
 }
