@@ -57,7 +57,7 @@
                                     <th rowspan="2">
                                         {{ trans('cruds.role.fields.title') }}
                                     </th>
-                                    <th colspan="{{ $permission_resources->count() }}">
+                                    <th colspan="{{ $resource_permissions->count() }}">
                                         {{ trans('cruds.role.fields.permissions') }}
                                     </th>
                                     <th rowspan="2">
@@ -65,7 +65,7 @@
                                     </th>
                                 </tr>
                                 <tr>
-                                    @foreach ($permission_resources as $resource)
+                                    @foreach ($resource_permissions as $resource => $permissions )
                                     <th>
                                         <span class="badge badge-danger">{{ ucfirst($resource) }}</span>
                                     </th>
@@ -82,27 +82,21 @@
                                             {{ $role->title ?? '' }}
                                         </td>
                                         @php
-                                            $resources_table = [];
-                                            foreach ($permission_resources as $resource) {
-                                                $resource_permissions[$resource] = $role->permissions->filter(function ($permission) use($resource) {
-                                                    return $permission->resource  == $resource;
-                                                });
-                                            }
+                                                $rolePermissions = $role->permissions->groupBy('resource'); 
                                         @endphp
 
-                                        @forelse ($permission_resources as $resource)
+                                        @foreach ($resource_permissions as $resource => $Allpermissions )
                                         <td class="row-permissions">
-                                            @forelse ($resource_permissions[$resource] as $permission)
-                                                <span class="badge badge-info">{{ $permission->title }}</span>
-                                            @empty
-                                                <span class="badge badge-warning"> No Permission </span>
-                                            @endforelse
+                                                @isset($rolePermissions[$resource])   {{-- forelse is only working with collection  --}}
+                                                    @foreach ($rolePermissions[$resource] as $id => $permission)
+                                                        <span class="badge badge-info">{{ $permission->title }}</span>
+                                                    @endforeach
+                                                @else
+                                                    <span class="badge badge-warning"> No Permissions </span>
+                                                @endisset
                                         </td>
-                                        @empty
-                                            <td class="row-permissions">
-                                                <span class="badge badge-warning"> No Permission Resources </span>
-                                            </td>
-                                        @endforelse
+                                        @endforeach
+                                        
                                         <td>
                                             @can('role_edit')
                                                 <a class="btn btn-sm btn-info" href="{{ route('roles.edit', $role->id) }}">

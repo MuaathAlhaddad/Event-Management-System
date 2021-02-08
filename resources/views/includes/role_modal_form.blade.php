@@ -1,7 +1,7 @@
  @push('css')
      <link rel="stylesheet" type="text/css" href=" {{ asset('argon/css/multi-select.css') }} ">
  @endpush
- <!-- Modal for Create and Edit User-->
+ <!-- Modal for Create and Edit Role-->
   <div class="modal fade text-left" id="role-modal" tabindex="-1" role="dialog" aria-labelledby="role-modal-label" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -30,10 +30,10 @@
                         <a href='#' id='select-all' class="btn btn-sm btn-primary">Select All</a>
                     </label>
                     <select  name="permissions[]"  id="input-permissions" multiple class="form-control {{ $errors->has('permissions') ? 'is-invalid' : '' }}" >
-                        @forelse ($permission_resources as $resource)
+                        @forelse ($resource_permissions as $resource => $permissions)
                         <optgroup label='{{ ucfirst($resource) }}'>
-                            @forelse ($resources_permissions[$resource] as $id =>  $permission)
-                                <option value=' {{ $id }} ' {{ (in_array($id, old('permissions', []))) ? 'selected' : '' }}>{{ $permission }}</option>                        
+                            @forelse ($permissions as $id =>  $permission)
+                                <option value=' {{ $permission->id }} ' {{ (in_array($permission->id, old('permissions', []))) ? 'selected' : '' }}>{{ $permission->title }}</option>                        
                             @empty
                                 
                             @endforelse

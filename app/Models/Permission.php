@@ -37,6 +37,10 @@ class Permission extends Model
     {
         return $query->where('resource', $resource);
     }
+    public static function getResources()
+    {
+        return self::groupBy('resource')->pluck('resource')->toArray();
+    }
 
 
     /** 

@@ -16,10 +16,12 @@ class PermissionsController extends Controller
     public function index()
     {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        
         $permissions = Permission::all();
 
-        return view('permissions.index', compact('permissions'));
+        $resource_permissions = $permissions->groupBy('resource');
+
+        return view('permissions.index', compact('resource_permissions' ));
     }
 
     public function create()
@@ -31,7 +33,11 @@ class PermissionsController extends Controller
 
     public function store(StorePermissionRequest $request)
     {
-        $permission = Permission::create($request->all());
+        $request->title = str_replace(' ', '_', $request->title); 
+        $permission = Permission::create([
+            'title' => $request->title,
+            'resource' => $request->resource,
+        ]);
 
         return redirect()->route('permissions.index');
     }

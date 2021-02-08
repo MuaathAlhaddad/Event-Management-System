@@ -1,3 +1,6 @@
+@push('css')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 <form action="{{ route('users.update', $user->id) }}" method="post" autocomplete="off" class="p-1" id="form-user-edit">  
     @csrf
     @method('PATCH')
@@ -158,8 +161,12 @@
 </form>
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
     <script>
           $(document).ready(function () {
+            
+
             var multipleCancelButton = new Choices('#input-user-role', {
                 removeItemButton: true,
                 maxItemCount: 5,
@@ -201,4 +208,5 @@
             });
         });
     </script>
+
 @endpush

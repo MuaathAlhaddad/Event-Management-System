@@ -31,7 +31,7 @@ class UsersController extends Controller
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
 
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('status', 'User created Successfully');
     }
 
     public function edit(User $user)
@@ -72,7 +72,7 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return back();
+        return back()->with('status', 'User deleted Successfully');
     }
 
     public function massDestroy(MassDestroyUserRequest $request)

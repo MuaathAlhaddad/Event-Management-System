@@ -33,10 +33,10 @@
                                     <a href='#' id='select-all' class="btn btn-sm btn-primary">Select All</a>
                                 </label>
                                 <select  name="permissions[]"  id="input-permissions" class="form-control {{ $errors->has('permissions') ? 'is-invalid' : '' }}" multiple>
-                                    @forelse ($permission_resources as $resource)
+                                    @forelse ($resource_permissions as $resource => $permissions)
                                     <optgroup label='{{ ucfirst($resource) }}'>
-                                        @forelse ($resources_permissions[$resource] as $id =>  $permission)
-                                            <option value=' {{ $id }} ' {{ (in_array($id, old('permissions', [])) || isset($role) && $role->permissions->contains($id)) ? 'selected' : '' }}>{{ $permission }}</option>                        
+                                        @forelse ($permissions as $id =>  $permission)
+                                            <option value=' {{ $permission->id }} ' {{ (in_array($permission->id, old('permissions', [])) || isset($role) && $role->permissions->contains($permission->id)) ? 'selected' : '' }}>{{ $permission->title }}</option>                        
                                         @empty
                                             
                                         @endforelse

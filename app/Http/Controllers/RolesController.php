@@ -19,12 +19,11 @@ class RolesController extends Controller
 
         $roles = Role::all();
 
-        $permission_resources = Permission::groupBy('resource')->pluck('resource');
-        foreach ($permission_resources as $resource) {
-            $resources_permissions[$resource] = Permission::resource($resource)->pluck('title', 'id');
-        }
+        $permissions = Permission::all();
+
+        $resource_permissions = $permissions->groupBy('resource');
         
-        return view('roles.index', compact('roles', 'permission_resources', 'resources_permissions'));
+        return view('roles.index', compact('roles', 'resource_permissions'));
     }
 
 
@@ -40,15 +39,13 @@ class RolesController extends Controller
     {
         abort_if(Gate::denies('role_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $permission_resources = Permission::groupBy('resource')->pluck('resource');
-        
-        foreach ($permission_resources as $resource) {
-            $resources_permissions[$resource] = Permission::resource($resource)->pluck('title', 'id');
-        }
+        $permissions = Permission::all();
+
+        $resource_permissions = $permissions->groupBy('resource');
 
         $role->load('permissions');
 
-        return view('roles.edit', compact('permission_resources', 'resources_permissions', 'role'));
+        return view('roles.edit', compact('resource_permissions',  'role'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role)
