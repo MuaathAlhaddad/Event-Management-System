@@ -58,15 +58,14 @@
                                         {{ trans('cruds.permission.fields.title') }}
                                     </th>
                                     <th>
+                                        Resource
+                                    </th>
+                                    <th>
                                         Actions
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($resource_permissions as $resource => $permissions )
-                                    <tr>
-                                        <td colspan="3" class=" text-uppercase bg-secondary"> {{ $resource }} </td>
-                                    </tr>
                                     @forelse ($permissions as $permission)
                                         <tr data-entry-id="{{ $permission->id }}">
                                             <td>
@@ -76,17 +75,22 @@
                                                 {{ $permission->title ?? '' }}
                                             </td>
                                             <td>
+                                                <span class="badge badge-dark">
+                                                    {{ $permission->resource ?? '' }}
+                                                </span>
+                                            </td>
+                                            <td>
                                                 @can('permission_edit')
-                                                    <a class="btn btn-xs btn-info" href="{{ route('permissions.edit', $permission->id) }}">
-                                                        {{ trans('global.edit') }}
+                                                    <a  href="{{ route('permissions.edit', $permission->id) }}">
+                                                        <i class="far fa-edit text-primary"></i>
                                                     </a>
                                                 @endcan
                     
                                                 @can('permission_delete')
-                                                    <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                                    <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST" style="display: inline-block;">
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                                        <i class="far fa-trash-alt text-danger delete-btn" style=" cursor: pointer;"></i> 
                                                     </form>
                                                 @endcan
                     
@@ -97,82 +101,45 @@
                                         <td colspan="3">No Permission</td>
                                     </tr>
                                     @endforelse
-                                @empty
-                                <tr>
-                                    <td colspan="3">No Recourse Permission</td>
-                                </tr>
-                                @endforelse
                             </tbody>
                         </table>
+                    </div>
+
+                    {{-- Pagination --}}
+                    <div class="card-footer py-4">
+                        {{ $permissions->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-@parent
-<script>
-    $(function () {
-        let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-        @can('role_delete')
-        let deleteButtonTrans = '{{ trans('
-        global.datatables.delete ') }}'
-        let deleteButton = {
-            text: deleteButtonTrans,
-            url: "{{ route('roles.massDestroy') }}",
-            className: 'btn-danger',
-            action: function (e, dt, node, config) {
-                var ids = $.map(dt.rows({
-                    selected: true
-                }).nodes(), function (entry) {
-                    return $(entry).data('entry-id')
+
+@push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete-btn').on('click', function() {
+                swal({
+                        title: "Are you sure?",
+                        text: "you want to delete this Permission!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $(this).closest('form').submit();
+                        swal("Poof! Permission has been deleted!", {
+                        icon: "success",
+                        buttons: false,
+                        });
+                    } else {
+                        swal("Permission is safe!", {
+                            buttons: false,
+                        });
+                    }
                 });
-
-                if (ids.length === 0) {
-                    alert('{{ trans('
-                        global.datatables.zero_selected ') }}')
-
-                    return
-                }
-
-                if (confirm('{{ trans('
-                        global.areYouSure ') }}')) {
-                    $.ajax({
-                            headers: {
-                                'x-csrf-token': _token
-                            },
-                            method: 'POST',
-                            url: config.url,
-                            data: {
-                                ids: ids,
-                                _method: 'DELETE'
-                            }
-                        })
-                        .done(function () {
-                            location.reload()
-                        })
-                }
-            }
-        }
-        dtButtons.push(deleteButton)
-        @endcan
-
-        $.extend(true, $.fn.dataTable.defaults, {
-            order: [
-                [1, 'desc']
-            ],
-            pageLength: 100,
         });
-        $('.datatable-Role:not(.ajaxTable)').DataTable({
-            buttons: dtButtons
-        })
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $($.fn.dataTable.tables(true)).DataTable()
-                .columns.adjust();
-        });
-    })
-
-</script>
+    </script>
+@endpush
 @endsection

@@ -40,6 +40,7 @@
         <script src="{{ asset('argon') }}/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <!-- MultiSelect -->
         <script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006273/BBBootstrap/choices.min.js?version=7.0.0"></script>
+
         </script>
         @stack('js')
         <!-- Argon JS -->

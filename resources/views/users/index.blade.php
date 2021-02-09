@@ -71,26 +71,26 @@
                                         <td class="text-lowercase">
                                             {{ $user->email ?? '' }}
                                         </td>
-                                        <td class="text-lowercase">
-                                            {{ $user->created_at->format('Y-m-d') }}
-                                        </td>
                                         <td >
                                             @foreach($user->roles as $key => $item)
                                                 <span class="badge badge-info">{{ $item->title }}</span>
                                             @endforeach
                                         </td>
-                                        <td class="text-capitalize">
+                                        <td class="text-lowercase">
+                                            {{ $user->created_at->format('Y-m-d') }}
+                                        </td>
+                                        <td class="text-capitalize" >
                                             @can('user_show')
-                                                <a class="btn btn-xs btn-primary" href="{{ route('users.show', $user->id) }}">
-                                                    {{ trans('global.view') }}
+                                                <a  href="{{ route('users.show', $user->id) }}">
+                                                    <i class="far fa-edit text-primary"></i>
                                                 </a>
                                             @endcan
             
                                             @can('user_delete')
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                                    <i class="far fa-trash-alt text-danger delete-btn" style=" cursor: pointer;"></i> 
                                                 </form>
                                             @endcan
             
@@ -111,4 +111,31 @@
         </div>
     </div>
 </div>
+@push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete-btn').on('click', function() {
+                swal({
+                        title: "Are you sure?",
+                        text: "you want to delete this user!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $(this).closest('form').submit();
+                        swal("Poof! User has been deleted!", {
+                        icon: "success",
+                        buttons: false,
+                        });
+                    } else {
+                        swal("User is safe!", {
+                            buttons: false,
+                        });
+                    }
+                });
+        });
+    </script>
+@endpush
 @endsection

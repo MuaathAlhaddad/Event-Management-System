@@ -17,11 +17,11 @@ class PermissionsController extends Controller
     {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
-        $permissions = Permission::all();
+        $permissions = Permission::paginate(10);
 
         $resource_permissions = $permissions->groupBy('resource');
 
-        return view('permissions.index', compact('resource_permissions' ));
+        return view('permissions.index', compact('resource_permissions', 'permissions' ));
     }
 
     public function create()

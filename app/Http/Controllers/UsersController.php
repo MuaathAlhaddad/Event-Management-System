@@ -72,7 +72,7 @@ class UsersController extends Controller
 
         $user->delete();
 
-        return back()->with('status', 'User deleted Successfully');
+        return back();
     }
 
     public function massDestroy(MassDestroyUserRequest $request)
@@ -84,7 +84,9 @@ class UsersController extends Controller
 
     public function update_profile(UpdateUserProfileRequest $request) {
         if ($request->hasFile('avatar')) {
+            
             $path = Storage::putFile('public/avatars', $request->file('avatar'));
+
             User::findOrFail($request->user_id)->update(['avatar' => basename($path)]);
         }
         return back()->with('status', 'Profile Updated Successfully');

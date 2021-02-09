@@ -99,16 +99,16 @@
                                         
                                         <td>
                                             @can('role_edit')
-                                                <a class="btn btn-sm btn-info" href="{{ route('roles.edit', $role->id) }}">
-                                                    {{ trans('global.edit') }}
+                                                <a href="{{ route('roles.edit', $role->id) }}">
+                                                    <i class="far fa-edit text-primary"></i>
                                                 </a>
                                             @endcan
             
                                             @can('role_delete')
-                                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST"  style="display: inline-block;">
                                                     <input type="hidden" name="_method" value="DELETE">
                                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="btn btn-sm btn-danger" value="{{ trans('global.delete') }}">
+                                                    <i class="far fa-trash-alt text-danger delete-btn" style=" cursor: pointer;"></i> 
                                                 </form>
                                             @endcan
             
@@ -124,69 +124,33 @@
         </div>
     </div>
 </div>
-@endsection
-@section('scripts')
-@parent
-<script>
-    $(function () {
-        let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-        @can('role_delete')
-        let deleteButtonTrans = '{{ trans('
-        global.datatables.delete ') }}'
-        let deleteButton = {
-            text: deleteButtonTrans,
-            url: "{{ route('roles.massDestroy') }}",
-            className: 'btn-danger',
-            action: function (e, dt, node, config) {
-                var ids = $.map(dt.rows({
-                    selected: true
-                }).nodes(), function (entry) {
-                    return $(entry).data('entry-id')
+
+
+@push('js')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $('.delete-btn').on('click', function() {
+                swal({
+                        title: "Are you sure?",
+                        text: "you want to delete this Role!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $(this).closest('form').submit();
+                        swal("Poof! Role has been deleted!", {
+                        icon: "success",
+                        buttons: false,
+                        });
+                    } else {
+                        swal("Role is safe!", {
+                            buttons: false,
+                        });
+                    }
                 });
-
-                if (ids.length === 0) {
-                    alert('{{ trans('
-                        global.datatables.zero_selected ') }}')
-
-                    return
-                }
-
-                if (confirm('{{ trans('
-                        global.areYouSure ') }}')) {
-                    $.ajax({
-                            headers: {
-                                'x-csrf-token': _token
-                            },
-                            method: 'POST',
-                            url: config.url,
-                            data: {
-                                ids: ids,
-                                _method: 'DELETE'
-                            }
-                        })
-                        .done(function () {
-                            location.reload()
-                        })
-                }
-            }
-        }
-        dtButtons.push(deleteButton)
-        @endcan
-
-        $.extend(true, $.fn.dataTable.defaults, {
-            order: [
-                [1, 'desc']
-            ],
-            pageLength: 100,
         });
-        $('.datatable-Role:not(.ajaxTable)').DataTable({
-            buttons: dtButtons
-        })
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            $($.fn.dataTable.tables(true)).DataTable()
-                .columns.adjust();
-        });
-    })
-
-</script>
+    </script>
+@endpush
 @endsection
