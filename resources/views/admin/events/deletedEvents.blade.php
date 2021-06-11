@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 @can('event_show')
-                                <a class="btn btn-xs btn-primary" href="{{ route('admin.events.show', $event->id) }}">
+                                <a class="btn btn-xs btn-primary"  style="background-color:#BA55D3!important; border-color:#BA55D3; color:white!important;" href="{{ route('admin.events.show', $event->id) }}">
                                     {{ trans('global.view') }}
                                 </a>
                                 @endcan
@@ -53,13 +53,13 @@
                                     style="display: inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="btn btn-xs btn-danger"
+                                    <input type="submit" class="btn btn-xs btn-danger"  style="background-color:#9400D3!important; border-color:#9400D3; color:white!important;"
                                         value="{{ trans('global.permanent_delete') }}">
                                 </form>
                                 @endcan
 
                                 @can('event_restore')
-                                <a class="btn btn-xs btn-warning text-white" href="{{ route('admin.events.restore', $event->id) }}">
+                                <a class="btn btn-xs btn-warning text-white"  style="background-color:#663399!important; border-color:#663399; color:white!important;" href="{{ route('admin.events.restore', $event->id) }}">
                                     {{ trans('global.restore') }}
                                 </a>
                                 @endcan

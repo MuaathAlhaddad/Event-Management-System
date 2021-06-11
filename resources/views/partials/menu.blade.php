@@ -1,9 +1,17 @@
-<div class="sidebar">
+<style>
+.nav-item :hover{
+    background-color:#404040!important;
+
+}
+</style>
+
+<div class="sidebar" style= "background-image: linear-gradient(to right top, #7705a4,#650180,#51025f,#3b0441,#260326)!important;">
+
     <nav class="sidebar-nav">
 
         <ul class="nav">
             <li class="nav-item">
-                <a href="{{ route("admin.home") }}" class="nav-link">
+                <a href="{{ route("admin.dashboard") }}" class="nav-link">
                     <i class="nav-icon fas fa-fw fa-tachometer-alt">
 
                     </i>

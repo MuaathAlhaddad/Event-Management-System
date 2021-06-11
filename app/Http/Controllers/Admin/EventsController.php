@@ -9,6 +9,7 @@ use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\User;
 use Carbon\Carbon;
+use Carbon\Traits\Date;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,26 +19,20 @@ class EventsController extends Controller
 {
     public function index()
     {
+        //abort-if   (HTTP exception)
+        //Gate::     (to authorize an action)
+        //foreach    (loop)
+        //carbon     (DateTime class)
+        //compact()  (Create an array from variables and their values)
         abort_if(Gate::denies('event_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         
         $events = Event::withCount('events')->get();
-
         foreach ($events as $key => $event) {
-            // Calculate Percentage
-            $attendees = count( (array) $event->attendees_ids);
-            $total = $event->max_no_attendees;
-            $percent = $attendees/$total;
-            $percentage = number_format( $percent * 100) . '%';
-            // update field 
-            $event->percentage = $percentage;
-            $event->save();
-            if((integer) rtrim($percentage, "%") == 100) {
-                $event->status = true;    
-            } 
-            if (Carbon::now() > $event->end_time ) {
+            if (Carbon::now('Asia/Singapore') > $event->end_time ) {
                 $event->delete();
-            }
+            } 
         }
+
         return view('admin.events.index', compact('events'));
     }
 
@@ -51,7 +46,24 @@ class EventsController extends Controller
     public function store(StoreEventRequest $request)
     {
         $event = $request->all();
-        $event["moderator_id"] = Auth::id();  
+        $path = $request->file('profile')->store('public/events');
+        $profile = basename($path);
+        $event["profile"] = $profile; 
+        $event["moderator_id"] = Auth::id(); 
+
+        // Calculate Percentage
+        $attendees = count( (array) $request->attendees_ids);
+        $total = $request->max_no_attendees;
+        $percent = $attendees/$total;
+        $percentage = number_format( $percent * 100) . '%';
+        
+        // update field 
+        $request->percentage = $percentage;
+        
+        if((integer) rtrim($percentage, "%") == 100) {
+            $request->status = true;    
+        } 
+ 
         Event::create($event);
 
         return redirect()->route('admin.systemCalendar');
@@ -70,7 +82,6 @@ class EventsController extends Controller
     public function update(UpdateEventRequest $request, Event $event)
     {
         $event->update($request->all());
-
         return redirect()->route('admin.systemCalendar');
     }
 

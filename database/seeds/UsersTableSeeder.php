@@ -10,7 +10,7 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                [
+                 [
                     'id'             => 1,
                     'first_name'           => 'admin',
                     'last_name'           => 'admin',
@@ -20,10 +20,10 @@ class UsersTableSeeder extends Seeder
                     'password'       => Hash::make('admin'),
                     'remember_token' => null,
                 ], 
-                [
+                 [
                     'id'             => 2,
                     'first_name'           => 'Ali',
-                    'last_name'           => 'Alwani',
+                    'last_name'           => 'Alwan',
                     'phone_number'           => '01112223334',
                     'email'          => 'ali@staff.com',
                     'gender'          => 'm',
@@ -109,7 +109,7 @@ class UsersTableSeeder extends Seeder
                     'gender'          => 'f',
                     'password'       => Hash::make('muna'),
                     'remember_token' => null,
-                ],
+                ],  
             ],
         ];
 
